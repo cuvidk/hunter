@@ -21,5 +21,11 @@ install_assetfinder() {
     ln -s "$GO_PACKAGE_PATH/bin/assetfinder" /usr/bin/assetfinder
 }
 
+install_httprobe() {
+    go get -u github.com/tomnomnom/httprobe
+    ln -s "$GO_PACKAGE_PATH/bin/httprobe" /usr/bin/httprobe
+}
+
 install_golang
 install_assetfinder
+install_httprobe
