@@ -3,6 +3,7 @@
 PACKAGES="go\
          "
 GO_PACKAGE_PATH="/opt/go"
+EYEWITNESS_PATH="/opt/eyewitness"
 
 if [ `id -u` -ne 0 ]; then
     echo "Usage: sudo $0"
@@ -26,6 +27,13 @@ install_httprobe() {
     ln -s "$GO_PACKAGE_PATH/bin/httprobe" /usr/bin/httprobe
 }
 
+install_eyewitness() {
+    git clone https://github.com/FortyNorthSecurity/EyeWitness.git "$EYEWITNESS_PATH"
+    sh "$EYEWITNESS_PATH/Python/setup/setup.sh"
+    ln -s "$EYEWITNESS_PATH/Python/EyeWitness.py" /usr/bin/eyewitness
+}
+
 install_golang
 install_assetfinder
 install_httprobe
+install_eyewitness
