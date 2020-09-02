@@ -31,6 +31,20 @@ install_eyewitness() {
     git clone https://github.com/FortyNorthSecurity/EyeWitness.git "$EYEWITNESS_PATH"
     sh "$EYEWITNESS_PATH/Python/setup/setup.sh"
     ln -s "$EYEWITNESS_PATH/Python/EyeWitness.py" /usr/bin/eyewitness
+
+    # the following issue should be fixed upstream instead; i submitted an issue
+    # to their git repository
+    rm -rf /usr/bin/geckodriver
+    geckodriver_x86_64='https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckodriver-v0.26.0-linux64.tar.gz'
+    wget ${geckodriver_x86_64}
+    tar -xvf geckodriver-v0.26.0-linux64.tar.gz
+    rm geckodriver-v0.26.0-linux64.tar.gz
+    mv geckodriver /usr/bin/geckodriver
+
+    # firefox is not installed because python3-netaddr is not a valid package (fix this upstream)
+    for package in python-netaddr firefox; do
+        pacman -S --noconfirm "${package}"
+    done
 }
 
 install_golang
