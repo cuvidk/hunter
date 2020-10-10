@@ -14,7 +14,7 @@ install_packages() {
 }
 
 install_config_files() {
-    ./config-files/update_config.sh --config vim
+    "${WORKING_DIR}/config-files/update_config.sh" --config vim
 }
 
 #########################################################################
