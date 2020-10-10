@@ -20,7 +20,7 @@ install_config_files() {
 #########################################################################
 
 WORKING_DIR="$(realpath "$(dirname "${0}")")"
-. "${WORKING_DIR}/util.sh"
+. "${WORKING_DIR}/shell-utils/util.sh"
 
 # setup_output
 

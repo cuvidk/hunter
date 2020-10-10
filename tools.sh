@@ -131,9 +131,6 @@ remove_all() {
 WORKING_DIR="$(realpath "$(dirname "${0}")")"
 
 #. "${WORKING_DIR}/util.sh"
-#
-#STDOUT_LOG="${WORKING_DIR}/stdout.log"
-#STDERR_LOG="${WORKING_DIR}/stderr.log"
 
 GO_PACKAGE_PATH="/opt/go"
 EYEWITNESS_PATH="/opt/eyewitness"
