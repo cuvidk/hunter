@@ -22,7 +22,7 @@ install_config_files() {
 WORKING_DIR="$(realpath "$(dirname "${0}")")"
 . "${WORKING_DIR}/util.sh"
 
-setup_output
+# setup_output
 
 PACKAGES="vim
           sudo

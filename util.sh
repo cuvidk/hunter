@@ -10,9 +10,11 @@ setup_output() {
 }
 
 print_msg() {
-    [ -n "${OUT}" ] &&
-        echo -n -e "$1">>${OUT} ||
+    if [ -n "${OUT}" ]; then
+        echo -n -e "$1">>${OUT}
+    else
         echo -n -e "$1"
+    fi
 }
 
 perform_task() {
