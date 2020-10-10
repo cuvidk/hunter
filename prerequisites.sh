@@ -1,9 +1,25 @@
 #!/bin/sh
 
-. ./util.sh
+#########################################################################
 
-STDOUT_LOG='stdout.log'
-STDERR_LOG='stderr.log'
+install_packages() {
+    for package in ${PACKAGES}; do
+        perform_task_arg install_package ${package} "Installing package ${package} "
+    done
+}
+
+install_config_files() {
+    ./config-files/update_config.sh --config vim
+}
+
+#########################################################################
+
+WORKING_DIR="$(realpath "$(dirname "${0}")")"
+
+. "${WORKING_DIR}/util.sh"
+
+STDOUT_LOG="${WORKING_DIR}/stdout.log"
+STDERR_LOG="${WORKING_DIR}/stderr.log"
 
 PACKAGES="vim
           man-db
@@ -15,27 +31,6 @@ PACKAGES="vim
           zsh
           sudo
           "
-
-#########################################################################
-
-install_packages() {
-    for package in ${PACKAGES}; do
-        perform_task_arg install_package ${package} "Installing package ${package} "
-    done
-}
-
-install_config_files() {
-    local ret=0j
-    cd ./config-files
-    if [ $? -eq 0 ]; then
-        ./update_config --config vim
-        ret=$?
-        cd ..
-    fi
-    return ${ret}
-}
-
-#########################################################################
 
 if [ -t 1 ]; then
     "${0}" "${@}" >"${STDOUT_LOG}" 2>${STDERR_LOG}

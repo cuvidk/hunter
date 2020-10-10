@@ -1,8 +1,5 @@
 #!/bin/sh
 
-GO_PACKAGE_PATH="/opt/go"
-EYEWITNESS_PATH="/opt/eyewitness"
-
 ###################### INSTALL ######################
 
 install_golang() {
@@ -27,19 +24,20 @@ install_httprobe() {
 install_amass() {
     sudo -H -E -u "${g_user}" go get -v github.com/OWASP/Amass/v3/...
     ln -s "${GO_PACKAGE_PATH}/bin/amass" /usr/bin/amass
-    git clone "https://github.com/OWASP/Amass"
+    git clone "https://github.com/OWASP/Amass" "${WORKING_DIR}/Amass"
     mkdir -p /opt/wordlists/amass
-    cp ./Amass/examples/wordlists/* /opt/wordlists/amass
-    rm -rf ./Amass
+    cp "${WORKING_DIR}/Amass/examples/wordlists/*" /opt/wordlists/amass
+    rm -rf "${WORKING_DIR}/Amass"
 }
 
 install_eyewitness() {
-    git clone https://github.com/cuvidk/EyeWitness.git "$EYEWITNESS_PATH"
+    git clone https://github.com/cuvidk/EyeWitness.git "${EYEWITNESS_PATH}"
     chown -R "${g_user}:${g_user}" "${EYEWITNESS_PATH}"
-    cd "$EYEWITNESS_PATH"
+    cd "${EYEWITNESS_PATH}"
     git checkout fix-recursive-symlink-and-bad-pkg-name-arch
-    sh "$EYEWITNESS_PATH/Python/setup/setup.sh"
-    ln -s "$EYEWITNESS_PATH/Python/EyeWitness.py" /usr/bin/eyewitness
+    sh "${EYEWITNESS_PATH}/Python/setup/setup.sh"
+    ln -s "${EYEWITNESS_PATH}/Python/EyeWitness.py" /usr/bin/eyewitness
+    cd -
 
     # the following issue should be fixed upstream instead; i submitted a pullrequest
     # to their git repository
@@ -59,13 +57,13 @@ install_eyewitness() {
 
 install_subfinder() {
     local version="2.4.5"
-    mkdir ./subfinder
-    cd ./subfinder
+    mkdir "${WORKING_DIR}/subfinder"
+    cd "${WORKING_DIR}/subfinder"
     wget "https://github.com/projectdiscovery/subfinder/releases/download/v${version}/subfinder_${version}_linux_amd64.tar.gz"
     tar -xzvf "subfinder_${version}_linux_amd64.tar.gz"
     mv subfinder /usr/bin/
-    cd ..
-    rm -rf ./subfinder
+    cd -
+    rm -rf "${WORKING_DIR}/subfinder"
 }
 
 fix_wordlists_owner() {
@@ -129,6 +127,16 @@ remove_all() {
 }
 
 #######################################################
+
+WORKING_DIR="$(realpath "$(dirname "${0}")")"
+
+#. "${WORKING_DIR}/util.sh"
+#
+#STDOUT_LOG="${WORKING_DIR}/stdout.log"
+#STDERR_LOG="${WORKING_DIR}/stderr.log"
+
+GO_PACKAGE_PATH="/opt/go"
+EYEWITNESS_PATH="/opt/eyewitness"
 
 usage() {
     echo "Usage: ${0} <install|remove> [--user <user_owning_tools>]"
