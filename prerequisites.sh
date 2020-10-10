@@ -2,6 +2,11 @@
 
 #########################################################################
 
+install_package() {
+    local package_name=$1
+    pacman -S --noconfirm "${package_name}"
+}
+
 install_packages() {
     for package in ${PACKAGES}; do
         perform_task_arg install_package ${package} "Installing package ${package} "
