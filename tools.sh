@@ -74,7 +74,7 @@ install_all() {
     install_golang
     #install_assetfinder
     install_httprobe
-    install_eyewitness
+    #install_eyewitness
     install_amass
     install_subfinder
     fix_wordlists_owner
@@ -120,7 +120,7 @@ remove_all() {
     remove_golang
     #remove_assetfinder
     remove_httprobe
-    remove_eyewitness
+    #remove_eyewitness
     remove_amass
     remove_subfinder
     remove_wordlists
