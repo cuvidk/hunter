@@ -12,11 +12,7 @@ install_golang() {
 
 install_metabigor() {
     sudo -H -E -u "${g_user}" go get -u github.com/j3ssie/metabigor
-    mkdir /opt/metabigor
-    cp ~/go/bin/metabigor /opt/metabigor/
-    chown -R "${g_user}:${g_user}" /opt/metabigor
-    rm -rf ~/go
-    ln -s "/opt/metabigor/metabigor" /usr/bin/metabigor
+    ln -s "${GO_PACKAGE_PATH}/bin/metabigor" /usr/bin/metabigor
 }
 
 install_asnlookup() {
@@ -53,11 +49,7 @@ install_getrelationship() {
 
 install_gospider() {
     sudo -E -H -u "${g_user}" go get -u github.com/jaeles-project/gospider
-    mkdir /opt/gospider
-    cp ~/go/bin/gospider /opt/gospider/
-    chown -R "${g_user}:${g_user}" /opt/gospider
-    rm -rf ~/go
-    ln -s "/opt/gospider/gospider" /usr/bin/gospider
+    ln -s "${GO_PACKAGE_PATH}/bin/gospider" /usr/bin/gospider
 }
 
 install_assetfinder() {
@@ -228,7 +220,6 @@ remove_getrelationship() {
 }
 
 remove_gospider() {
-    rm -rf /opt/gospider
     rm -rf /usr/bin/gospider
 }
 
