@@ -43,6 +43,7 @@ install_getrelationship() {
     wget "https://raw.githubusercontent.com/m4ll0k/Bug-Bounty-Toolz/master/getrelationship.py"
     mkdir /opt/getrelationship
     mv getrelationship.py /opt/getrelationship/getrelationship.py
+    chmod +x /opt/getrelationship/getrelationship.py
     chown -R "${g_user}:${g_user}" /opt/getrelationship
     ln -s /opt/getrelationship/getrelationship.py /usr/bin/getrelationship
 }
