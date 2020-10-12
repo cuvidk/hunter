@@ -66,6 +66,39 @@ install_subfinder() {
     rm -rf "${WORKING_DIR}/subfinder"
 }
 
+install_massdns() {
+    git clone 'https://github.com/blechschmidt/massdns.git' "${WORKING_DIR}/massdns"
+    cd "${WORKING_DIR}/massdns"
+    make
+    mkdir /opt/massdns
+    cp "${WORKING_DIR}/massdns/bin/massdns" /opt/massdns/
+    chown -R "${g_user}:${g_user}" /opt/massdns
+    ln -s /opt/massdns/massdns /usr/bin/massdns
+    cd -
+    rm -rf "${WORKING_DIR}/massdns"
+}
+
+install_masscan() {
+    git clone 'https://github.com/robertdavidgraham/masscan' "${WORKING_DIR}/masscan"
+    cd "${WORKING_DIR}/masscan"
+    make
+    mkdir /opt/masscan
+    cp "${WORKING_DIR}/masscan/bin/masscan" /opt/masscan/
+    chown -R "${g_user}:${g_user}" /opt/masscan
+    ln -s /opt/masscan/masscan /usr/bin/masscan
+    cd -
+    rm -rf "${WORKING_DIR}/masscan"
+}
+
+install_dnmasscan() {
+    git clone "https://github.com/rastating/dnmasscan.git" "${WORKING_DIR}/dnmasscan"
+    mkdir /opt/dnmasscan
+    cp "${WORKING_DIR}/dnmasscan" /opt/dnmasscan/
+    chown -R "${g_user}:${g_user}" /opt/dnmasscan
+    ln -s /opt/dnmasscan/dnmasscan /usr/bin/dnmasscan
+    rm -rf "${WORKING_DIR}/dnmasscan"
+}
+
 fix_wordlists_owner() {
     chown -R "${g_user}:${g_user}" /opt/wordlists
 }
@@ -77,6 +110,9 @@ install_all() {
     #install_eyewitness
     install_amass
     install_subfinder
+    install_massdns
+    install_masscan
+    install_dnmasscan
     fix_wordlists_owner
 }
 
@@ -116,6 +152,22 @@ remove_wordlists() {
     rm -rf /opt/wordlists
 }
 
+remove_massdns() {
+    rm -rf /usr/bin/massdns
+    rm -rf /opt/massdns
+}
+
+remove_masscan() {
+    rm -rf /opt/masscan
+    rm -rf /usb/bin/masscan
+}
+
+remove_dnmasscan() {
+    rm -rf /opt/dnmasscan
+    rm -rf /usr/bin/dnmasscan
+}
+
+
 remove_all() {
     remove_golang
     #remove_assetfinder
@@ -123,6 +175,9 @@ remove_all() {
     #remove_eyewitness
     remove_amass
     remove_subfinder
+    remove_massdns
+    remove_masscan
+    remove_dnmasscan
     remove_wordlists
 }
 
