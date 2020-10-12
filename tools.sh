@@ -115,7 +115,7 @@ install_brutespray() {
     cp "${WORKING_DIR}/brutespray/brutespray.py" /opt/brutespray/
     chown -R "${g_user}:${g_user}" /opt/brutespray
     ln -s /opt/brutespray/brutespray.py /usr/bin/brutespray
-    cp -R "${WORKING_DIR}/brutespray/wordlist/*" /opt/wordlists/brutespray
+    cp -R "${WORKING_DIR}/brutespray/wordlist/" /opt/wordlists/brutespray/
     rm -rf "${WORKING_DIR}/brutespray"
 }
 
