@@ -7,12 +7,15 @@ install_golang() {
     mkdir -p "${GO_PACKAGE_PATH}"
     chown -R "${g_user}:${g_user}" "${GO_PACKAGE_PATH}"
     echo "export GOPATH=${GO_PACKAGE_PATH}" >"/etc/profile.d/go.sh"
-    echo "export GO111MODULE=on" >>"/etc/profile.d/go.sh"
     . /etc/profile.d/go.sh
 }
 
 install_metabigor() {
     sudo -H -E -u "${g_user}" go get -u github.com/j3ssie/metabigor
+    mkdir /opt/metabigor
+    cp ~/go/bin/metabigor /opt/metabigor/
+    chown -R "${g_user}:${g_user}" /opt/metabigor
+    rm -rf ~/go
     ln -s "${GO_PACKAGE_PATH}/bin/metabigor" /usr/bin/metabigor
 }
 
@@ -21,6 +24,7 @@ install_asnlookup() {
     pip install -r "${WORKING_DIR}/Asnlookup/requirements.txt"
     mkdir /opt/asnlookup
     cp "${WORKING_DIR}/Asnlookup/asnlookup.py" /opt/asnlookup/
+    chmod +x /opt/asnlookup/asnlookup.py
     cp "${WORKING_DIR}/Asnlookup/config.py" /opt/asnlookup/
     chown -R "${g_user}:${g_user}" /opt/asnlookup
     ln -s /opt/asnlookup/asnlookup.py /usr/bin/asnlookup
@@ -28,17 +32,23 @@ install_asnlookup() {
 }
 
 install_assetfinder() {
+    export GO111MODULE=on
     sudo -H -E -u "${g_user}" go get -u github.com/tomnomnom/assetfinder
+    unset GO111MODULE
     ln -s "$GO_PACKAGE_PATH/bin/assetfinder" /usr/bin/assetfinder
 }
 
 install_httprobe() {
+    export GO111MODULE=on
     sudo -H -E -u "${g_user}" go get -u github.com/tomnomnom/httprobe
+    unset GO111MODULE
     ln -s "$GO_PACKAGE_PATH/bin/httprobe" /usr/bin/httprobe
 }
 
 install_amass() {
+    export GO111MODULE=on
     sudo -H -E -u "${g_user}" go get -v github.com/OWASP/Amass/v3/...
+    unset GO111MODULE
     ln -s "${GO_PACKAGE_PATH}/bin/amass" /usr/bin/amass
     git clone "https://github.com/OWASP/Amass" "${WORKING_DIR}/Amass"
     mkdir -p /opt/wordlists/amass

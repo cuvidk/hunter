@@ -34,6 +34,7 @@ PACKAGES="vim
           git
           zsh
           python-pip
+          iputils
           "
 
 perform_task install_packages
