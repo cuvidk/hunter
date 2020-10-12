@@ -53,6 +53,27 @@ install_gospider() {
     ln -s "${GO_PACKAGE_PATH}/bin/gospider" /usr/bin/gospider
 }
 
+install_hakrawler() {
+    sudo -E -H -u "${g_user}" go get -u github.com/hakluke/hakrawler
+    ln -s "${GO_PACKAGE_PATH}/bin/hakrawler" /usr/bin/hakrawler
+}
+
+install_subdomainizer() {
+    git clone "https://github.com/nsonaniya2010/SubDomainizer.git" "${WORKING_DIR}/SubDomainizer"
+    pip install -r "${WORKING_DIR}/SubDomainizer/requirements.txt"
+    mkdir /opt/subdomainizer
+    cp "${WORKING_DIR}/SubDomainizer/SubDomainizer.py" /opt/subdomainizer/
+    chmod +x /opt/subdomainizer/SubDomainizer.py
+    chown -R "${g_user}:${g_user}" /opt/subdomainizer
+    ln -s /opt/subdomainizer/SubDomainizer.py /usr/bin/subdomainizer
+    rm -rf "${WORKING_DIR}/SubDomainizer"
+}
+
+install_github_subdomains() {
+    sudo -E -H -u "${g_user}" go get -u github.com/gwen001/github-subdomains
+    ln -s "${GO_PACKAGE_PATH}/bin/github-subdomains" /usr/bin/github-subdomains
+}
+
 install_assetfinder() {
     export GO111MODULE=on
     sudo -H -E -u "${g_user}" go get -u github.com/tomnomnom/assetfinder
@@ -168,6 +189,17 @@ install_brutespray() {
     rm -rf "${WORKING_DIR}/brutespray"
 }
 
+install_favfreak() {
+    git clone "https://github.com/devanshbatham/FavFreak" "${WORKING_DIR}/FavFreak"
+    mkdir /opt/favfreak
+    pip install -r "${WORKING_DIR}/FavFreak/requirements.txt"
+    cp "${WORKING_DIR}/FavFreak/favfreak.py" /opt/favfreak
+    chmod +x /opt/favfreak/favfreak.py
+    chown -R "${g_user}:${g_user}" /opt/favfreak
+    ln -s /opt/favfreak/favfreak.py /usr/bin/favfreak
+    rm -rf "${WORKING_DIR}/FavFreak"
+}
+
 fix_wordlists_owner() {
     chown -R "${g_user}:${g_user}" /opt/wordlists
 }
@@ -180,6 +212,9 @@ install_all() {
     install_domlink
     install_getrelationship
     install_gospider
+    install_hakrawler
+    install_subdomainizer
+    install_github_subdomains
     install_httprobe
     #install_eyewitness
     install_amass
@@ -190,6 +225,7 @@ install_all() {
     install_nmap
     install_medusa
     install_brutespray
+    install_favfreak
     fix_wordlists_owner
 }
 
@@ -222,6 +258,19 @@ remove_getrelationship() {
 
 remove_gospider() {
     rm -rf /usr/bin/gospider
+}
+
+remove_hakrawler() {
+    rm -rf /usr/bin/hakrawler
+}
+
+remove_subdomainizer() {
+    rm -rf /opt/subdomainizer
+    rm -rf /usr/bin/subdomainizer
+}
+
+remove_github_subdomains() {
+    rm -rf /usr/bin/github-subdomains
 }
 
 remove_assetfinder() {
@@ -280,6 +329,11 @@ remove_brutespray() {
     rm -rf /usr/bin/brutespray
 }
 
+remove_favfreak() {
+    rm -rf /opt/favfreak
+    rm -rf /usr/bin/favfreak
+}
+
 remove_all() {
     remove_golang
     #remove_assetfinder
@@ -288,6 +342,9 @@ remove_all() {
     remove_domlink
     remove_getrelationship
     remove_gospider
+    remove_hakrawler
+    remove_subdomainizer
+    remove_github_subdomains
     remove_httprobe
     #remove_eyewitness
     remove_amass
@@ -298,6 +355,7 @@ remove_all() {
     remove_nmap
     remove_medusa
     remove_brutespray
+    remove_favfreak
     remove_wordlists
 }
 
