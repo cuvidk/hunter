@@ -33,6 +33,7 @@ PACKAGES="vim
 	  base-devel
           git
           zsh
+          python-pip
           "
 
 perform_task install_packages

@@ -99,6 +99,26 @@ install_dnmasscan() {
     rm -rf "${WORKING_DIR}/dnmasscan"
 }
 
+install_nmap() {
+    pacman -S --noconfirm nmap
+}
+
+install_medusa() {
+    pacman -S --noconfirm medusa
+}
+
+install_brutespray() {
+    git clone "https://github.com/x90skysn3k/brutespray.git" "${WORKING_DIR}/brutespray"
+    mkdir /opt/brutespray
+    mkdir -p /opt/wordlists/brutespray
+    pip install -r "${WORKING_DIR}/brutespray/requirements.txt"
+    cp "${WORKING_DIR}/brutespray/brutespray.py" /opt/brutespray/
+    chown -R "${g_user}:${g_user}" /opt/brutespray
+    ln -s /opt/brutespray/brutespray.py /usr/bin/brutespray
+    cp -R "${WORKING_DIR}/brutespray/wordlist/*" /opt/wordlists/brutespray
+    rm -rf "${WORKING_DIR}/brutespray"
+}
+
 fix_wordlists_owner() {
     chown -R "${g_user}:${g_user}" /opt/wordlists
 }
@@ -113,6 +133,9 @@ install_all() {
     install_massdns
     install_masscan
     install_dnmasscan
+    install_nmap
+    install_medusa
+    install_brutespray
     fix_wordlists_owner
 }
 
@@ -167,6 +190,18 @@ remove_dnmasscan() {
     rm -rf /usr/bin/dnmasscan
 }
 
+remove_nmap() {
+    pacman -Rs --noconfirm nmap
+}
+
+remove_medusa() {
+    pacman -Rs --noconfirm medusa
+}
+
+remove_brutespray() {
+    rm -rf /opt/brutespray
+    rm -rf /usr/bin/brutespray
+}
 
 remove_all() {
     remove_golang
@@ -178,6 +213,9 @@ remove_all() {
     remove_massdns
     remove_masscan
     remove_dnmasscan
+    remove_nmap
+    remove_medusa
+    remove_brutespray
     remove_wordlists
 }
 
