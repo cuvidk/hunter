@@ -93,7 +93,7 @@ install_masscan() {
 install_dnmasscan() {
     git clone "https://github.com/rastating/dnmasscan.git" "${WORKING_DIR}/dnmasscan"
     mkdir /opt/dnmasscan
-    cp "${WORKING_DIR}/dnmasscan" /opt/dnmasscan/
+    cp "${WORKING_DIR}/dnmasscan/dnmasscan" /opt/dnmasscan/
     chown -R "${g_user}:${g_user}" /opt/dnmasscan
     ln -s /opt/dnmasscan/dnmasscan /usr/bin/dnmasscan
     rm -rf "${WORKING_DIR}/dnmasscan"
