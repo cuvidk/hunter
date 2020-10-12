@@ -16,7 +16,7 @@ install_metabigor() {
     cp ~/go/bin/metabigor /opt/metabigor/
     chown -R "${g_user}:${g_user}" /opt/metabigor
     rm -rf ~/go
-    ln -s "${GO_PACKAGE_PATH}/bin/metabigor" /usr/bin/metabigor
+    ln -s "/opt/metabigor/metabigor" /usr/bin/metabigor
 }
 
 install_asnlookup() {
@@ -29,6 +29,35 @@ install_asnlookup() {
     chown -R "${g_user}:${g_user}" /opt/asnlookup
     ln -s /opt/asnlookup/asnlookup.py /usr/bin/asnlookup
     rm -rf "${WORKING_DIR}/Asnlookup"
+}
+
+install_domlink() {
+    git clone "https://github.com/vysecurity/DomLink.git" "${WORKING_DIR}/DomLink"
+    pip install -r "${WORKING_DIR}/DomLink/requirements.txt"
+    mkdir /opt/domlink
+    cp "${WORKING_DIR}/DomLink/domLink.py" /opt/domlink
+    chmod +x /opt/domlink/domLink.py
+    mv "${WORKING_DIR}/DomLink/domLink.cfg.example" /opt/domlink/domLink.cfg
+    chown -R "${g_user}:${g_user}" /opt/domlink
+    ln -s /opt/domlink/domLink.py /usr/bin/domlink
+    rm -rf "${WORKING_DIR}/DomLink"
+}
+
+install_getrelationship() {
+    wget "https://raw.githubusercontent.com/m4ll0k/Bug-Bounty-Toolz/master/getrelationship.py"
+    mkdir /opt/getrelationship
+    mv getrelationship.py /opt/getrelationship/getrelationship.py
+    chown -R "${g_user}:${g_user}" /opt/getrelationship
+    ln -s /opt/getrelationship/getrelationship.py /usr/bin/getrelationship
+}
+
+install_gospider() {
+    sudo -E -H -u "${g_user}" go get -u github.com/jaeles-project/gospider
+    mkdir /opt/gospider
+    cp ~/go/bin/gospider /opt/gospider/
+    chown -R "${g_user}:${g_user}" /opt/gospider
+    rm -rf ~/go
+    ln -s "/opt/gospider/gospider" /usr/bin/gospider
 }
 
 install_assetfinder() {
@@ -155,6 +184,9 @@ install_all() {
     #install_assetfinder
     install_asnlookup
     install_metabigor
+    install_domlink
+    install_getrelationship
+    install_gospider
     install_httprobe
     #install_eyewitness
     install_amass
@@ -183,6 +215,21 @@ remove_metabigor() {
 remove_asnlookup() {
     rm -rf /opt/asnlookup
     rm -rf /usr/bin/asnlookup
+}
+
+remove_domlink() {
+    rm -rf /opt/domlink
+    rm -rf /usr/bin/domlink
+}
+
+remove_getrelationship() {
+    rm -rf /opt/getrelationship
+    rm -rf /usr/bin/getrelationship
+}
+
+remove_gospider() {
+    rm -rf /opt/gospider
+    rm -rf /usr/bin/gospider
 }
 
 remove_assetfinder() {
@@ -246,6 +293,9 @@ remove_all() {
     #remove_assetfinder
     remove_asnlookup
     remove_metabigor
+    remove_domlink
+    remove_getrelationship
+    remove_gospider
     remove_httprobe
     #remove_eyewitness
     remove_amass
