@@ -11,6 +11,22 @@ install_golang() {
     . /etc/profile.d/go.sh
 }
 
+install_metabigor() {
+    sudo -H -E -u "${g_user}" go get -u github.com/j3ssie/metabigor
+    ln -s "${GO_PACKAGE_PATH}/bin/metabigor" /usr/bin/metabigor
+}
+
+install_asnlookup() {
+    git clone "https://github.com/yassineaboukir/Asnlookup" "${WORKING_DIR}/Asnlookup"
+    pip install -r "${WORKING_DIR}/Asnlookup/requirements.txt"
+    mkdir /opt/asnlookup
+    cp "${WORKING_DIR}/Asnlookup/asnlookup.py" /opt/asnlookup/
+    cp "${WORKING_DIR}/Asnlookup/config.py" /opt/asnlookup/
+    chown -R "${g_user}:${g_user}" /opt/asnlookup
+    ln -s /opt/asnlookup/asnlookup.py /usr/bin/asnlookup
+    rm -rf "${WORKING_DIR}/Asnlookup"
+}
+
 install_assetfinder() {
     sudo -H -E -u "${g_user}" go get -u github.com/tomnomnom/assetfinder
     ln -s "$GO_PACKAGE_PATH/bin/assetfinder" /usr/bin/assetfinder
@@ -127,6 +143,8 @@ fix_wordlists_owner() {
 install_all() {
     install_golang
     #install_assetfinder
+    install_asnlookup
+    install_metabigor
     install_httprobe
     #install_eyewitness
     install_amass
@@ -146,6 +164,15 @@ remove_golang() {
     pacman -Rs --noconfirm go
     rm -rf /opt/go
     rm -rf /etc/profile.d/go.sh
+}
+
+remove_metabigor() {
+    rm -rf /usr/bin/metabigor
+}
+
+remove_asnlookup() {
+    rm -rf /opt/asnlookup
+    rm -rf /usr/bin/asnlookup
 }
 
 remove_assetfinder() {
@@ -207,6 +234,8 @@ remove_brutespray() {
 remove_all() {
     remove_golang
     #remove_assetfinder
+    remove_asnlookup
+    remove_metabigor
     remove_httprobe
     #remove_eyewitness
     remove_amass
