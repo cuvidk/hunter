@@ -231,7 +231,7 @@ install_favfreak() {
 
 install_subover() {
     sudo -H -E -u "${g_user}" go get "github.com/Ice3man543/SubOver"
-    ln -s "${GO_PACKAGE_PATH}/bin/subover" /usr/bin/subover
+    ln -s "${GO_PACKAGE_PATH}/bin/SubOver" /usr/bin/subover
 }
 
 fix_wordlists_owner() {
