@@ -69,9 +69,37 @@ install_subdomainizer() {
     rm -rf "${WORKING_DIR}/SubDomainizer"
 }
 
+install_subscraper() {
+    git clone "https://github.com/m8r0wn/subscraper" "${WORKING_DIR}/subscraper"
+    cd "${WORKING_DIR}/subscraper"
+    python3 setup.py install
+    mkdir /opt/subscraper
+    mv /usr/bin/subscraper /opt/subscraper/subscraper
+    chown -R "${g_user}:${g_user}" /opt/subscraper
+    ln -s /opt/subscraper/subscraper /usr/bin/subscraper
+    cd -
+    rm -rf "${WORKING_DIR}/subscraper"
+    # FIX API KEY FOR censys
+}
+
+install_shosubgo() {
+    git clone "https://github.com/incogbyte/shosubgo" /opt/shosubgo
+    echo '#!/bin/sh' >/opt/shosubgo/shosubgo.sh
+    # FIX API KEY
+    echo "go run /opt/shosubgo/main.go -s YourAPIKEY" '${@}' >>/opt/shosubgo/shosubgo.sh
+    chmod +x /opt/shosubgo/shosubgo.sh
+    ln -s /opt/shosubgo/shosubgo.sh /usr/bin/shosubgo
+    chown -R "${g_user}:${g_user}" /opt/shosubgo
+}
+
 install_github_subdomains() {
     sudo -E -H -u "${g_user}" go get -u github.com/gwen001/github-subdomains
     ln -s "${GO_PACKAGE_PATH}/bin/github-subdomains" /usr/bin/github-subdomains
+}
+
+install_github_search() {
+    git clone "https://github.com/gwen001/github-search.git" /opt/github-search
+    chown -R "${g_user}:${g_user}" /opt/github-search
 }
 
 install_assetfinder() {
@@ -200,12 +228,18 @@ install_favfreak() {
     rm -rf "${WORKING_DIR}/FavFreak"
 }
 
+install_subover() {
+    sudo -H -E -u go get "github.com/Ice3man543/SubOver"
+    ln -s "${GO_PACKAGE_PATH}/bin/subover" /usr/bin/subover
+}
+
 fix_wordlists_owner() {
     chown -R "${g_user}:${g_user}" /opt/wordlists
 }
 
 install_all() {
     install_golang
+    #install_eyewitness
     #install_assetfinder
     install_asnlookup
     install_metabigor
@@ -214,9 +248,11 @@ install_all() {
     install_gospider
     install_hakrawler
     install_subdomainizer
+    install_subscraper
+    install_shosubgo
     install_github_subdomains
+    install_github_search
     install_httprobe
-    #install_eyewitness
     install_amass
     install_subfinder
     install_massdns
@@ -226,6 +262,7 @@ install_all() {
     install_medusa
     install_brutespray
     install_favfreak
+    install_subover
     fix_wordlists_owner
 }
 
@@ -269,8 +306,22 @@ remove_subdomainizer() {
     rm -rf /usr/bin/subdomainizer
 }
 
+remove_subscraper() {
+    rm -rf /opt/subscraper
+    rm -rf /usr/bin/subscraper
+}
+
+remove_shosubgo() {
+    rm -rf /opt/shosubgo
+    rm -rf /usr/bin/shosubgo
+}
+
 remove_github_subdomains() {
     rm -rf /usr/bin/github-subdomains
+}
+
+remove_github_search() {
+    rm -rf /opt/github-search
 }
 
 remove_assetfinder() {
@@ -334,8 +385,13 @@ remove_favfreak() {
     rm -rf /usr/bin/favfreak
 }
 
+remove_subover() {
+    rm -rf /usr/bin/subover
+}
+
 remove_all() {
     remove_golang
+    #remove_eyewitness
     #remove_assetfinder
     remove_asnlookup
     remove_metabigor
@@ -344,9 +400,11 @@ remove_all() {
     remove_gospider
     remove_hakrawler
     remove_subdomainizer
+    remove_subscraper
+    remove_shosubgo
     remove_github_subdomains
+    remove_github_search
     remove_httprobe
-    #remove_eyewitness
     remove_amass
     remove_subfinder
     remove_massdns
@@ -356,6 +414,7 @@ remove_all() {
     remove_medusa
     remove_brutespray
     remove_favfreak
+    remove_subover
     remove_wordlists
 }
 
