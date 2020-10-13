@@ -73,6 +73,7 @@ install_subscraper() {
     git clone "https://github.com/m8r0wn/subscraper" "${WORKING_DIR}/subscraper"
     cd "${WORKING_DIR}/subscraper"
     python3 setup.py install
+    pip install ipparser
     mkdir /opt/subscraper
     mv /usr/bin/subscraper /opt/subscraper/subscraper
     chown -R "${g_user}:${g_user}" /opt/subscraper
@@ -229,7 +230,7 @@ install_favfreak() {
 }
 
 install_subover() {
-    sudo -H -E -u go get "github.com/Ice3man543/SubOver"
+    sudo -H -E -u "${g_user}" go get "github.com/Ice3man543/SubOver"
     ln -s "${GO_PACKAGE_PATH}/bin/subover" /usr/bin/subover
 }
 
