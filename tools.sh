@@ -171,7 +171,7 @@ install_massdns() {
     make
     mkdir /opt/massdns
     cp "${WORKING_DIR}/massdns/bin/massdns" /opt/massdns/
-    cp "${WORKING_DIR}/massdns/lists" /opt/massdns/
+    cp -R "${WORKING_DIR}/massdns/lists" /opt/massdns/
     chown -R "${g_user}:${g_user}" /opt/massdns
     ln -s /opt/massdns/massdns /usr/bin/massdns
     cd -
