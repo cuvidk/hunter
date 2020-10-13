@@ -86,8 +86,7 @@ install_subscraper() {
 install_shosubgo() {
     git clone "https://github.com/incogbyte/shosubgo" /opt/shosubgo
     echo '#!/bin/sh' >/opt/shosubgo/shosubgo.sh
-    # FIX API KEY
-    echo "go run /opt/shosubgo/main.go -s YourAPIKEY" '${@}' >>/opt/shosubgo/shosubgo.sh
+    echo "go run /opt/shosubgo/main.go -s ${SHODAN_KEY}" '${@}' >>/opt/shosubgo/shosubgo.sh
     chmod +x /opt/shosubgo/shosubgo.sh
     ln -s /opt/shosubgo/shosubgo.sh /usr/bin/shosubgo
     chown -R "${g_user}:${g_user}" /opt/shosubgo
@@ -423,6 +422,7 @@ remove_all() {
 
 WORKING_DIR="$(realpath "$(dirname "${0}")")"
 
+. "${WORKING_DIR}/key.config"
 #. "${WORKING_DIR}/util.sh"
 
 GO_PACKAGE_PATH="/opt/go"
