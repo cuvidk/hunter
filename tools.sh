@@ -76,17 +76,19 @@ install_subscraper() {
     pip install ipparser
     mkdir /opt/subscraper
     mv /usr/bin/subscraper /opt/subscraper/subscraper
+    echo '#!/bin/sh' >/opt/subscraper/subscraper.sh
+    echo "/opt/subscraper/subscraper --censys-api ${CENSYS_API_KEY} --censys-secret ${CENSYS_SECRET}" '${@}' >>/opt/subscraper/subscraper.sh
+    chmod +x /opt/subscraper/subscraper.sh
     chown -R "${g_user}:${g_user}" /opt/subscraper
-    ln -s /opt/subscraper/subscraper /usr/bin/subscraper
+    ln -s /opt/subscraper/subscraper.sh /usr/bin/subscraper
     cd -
     rm -rf "${WORKING_DIR}/subscraper"
-    # FIX API KEY FOR censys
 }
 
 install_shosubgo() {
     git clone "https://github.com/incogbyte/shosubgo" /opt/shosubgo
     echo '#!/bin/sh' >/opt/shosubgo/shosubgo.sh
-    echo "go run /opt/shosubgo/main.go -s ${SHODAN_KEY}" '${@}' >>/opt/shosubgo/shosubgo.sh
+    echo "go run /opt/shosubgo/main.go -s ${SHODAN_API_KEY}" '${@}' >>/opt/shosubgo/shosubgo.sh
     chmod +x /opt/shosubgo/shosubgo.sh
     ln -s /opt/shosubgo/shosubgo.sh /usr/bin/shosubgo
     chown -R "${g_user}:${g_user}" /opt/shosubgo
@@ -423,7 +425,6 @@ remove_all() {
 WORKING_DIR="$(realpath "$(dirname "${0}")")"
 
 . "${WORKING_DIR}/key.config"
-#. "${WORKING_DIR}/util.sh"
 
 GO_PACKAGE_PATH="/opt/go"
 EYEWITNESS_PATH="/opt/eyewitness"
