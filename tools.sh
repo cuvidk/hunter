@@ -236,6 +236,11 @@ install_subover() {
     ln -s "${GO_PACKAGE_PATH}/bin/SubOver" /usr/bin/subover
 }
 
+install_ffuf() {
+    sudo -H -E -u "${g_user}" go get "github.com/ffuf/ffuf"
+    ln -s "${GO_PACKAGE_PATH}/bin/ffuf" /usr/bin/ffuf
+}
+
 fix_wordlists_owner() {
     chown -R "${g_user}:${g_user}" "${WORDLISTS_PATH}"
 }
@@ -266,6 +271,7 @@ install_all() {
     install_brutespray
     install_favfreak
     install_subover
+    install_ffuf
     fix_wordlists_owner
 }
 
@@ -388,6 +394,10 @@ remove_subover() {
     rm -rf /usr/bin/subover
 }
 
+remove_ffuf() {
+    rm -rf /usr/bin/ffuf
+}
+
 remove_wordlists() {
     rm -rf "${WORDLISTS_PATH}"
 }
@@ -418,6 +428,7 @@ remove_all() {
     remove_brutespray
     remove_favfreak
     remove_subover
+    remove_ffuf
     remove_wordlists
 }
 
