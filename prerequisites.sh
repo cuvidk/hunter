@@ -35,6 +35,7 @@ PACKAGES="vim
           zsh
           python-pip
           iputils
+          iproute2
           "
 
 perform_task install_packages
