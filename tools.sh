@@ -241,6 +241,10 @@ install_ffuf() {
     ln -s "${GO_PACKAGE_PATH}/bin/ffuf" /usr/bin/ffuf
 }
 
+install_sqlmap() {
+    pacman -S --noconfirm sqlmap
+}
+
 fix_wordlists_owner() {
     chown -R "${g_user}:${g_user}" "${WORDLISTS_PATH}"
 }
@@ -272,6 +276,7 @@ install_all() {
     install_favfreak
     install_subover
     install_ffuf
+    install_sqlmap
     fix_wordlists_owner
 }
 
@@ -398,6 +403,10 @@ remove_ffuf() {
     rm -rf /usr/bin/ffuf
 }
 
+remove_sqlmap() {
+    pacman -Rs --noconfirm sqlmap
+}
+
 remove_wordlists() {
     rm -rf "${WORDLISTS_PATH}"
 }
@@ -429,6 +438,7 @@ remove_all() {
     remove_favfreak
     remove_subover
     remove_ffuf
+    remove_sqlmap
     remove_wordlists
 }
 
