@@ -13,8 +13,13 @@ install_packages() {
     done
 }
 
+install_ohmyzsh() {
+    "${WORKING_DIR}/config-files/installers/ohmyzsh.sh" install
+}
+
 install_config_files() {
     "${WORKING_DIR}/config-files/update_config.sh" --config vim
+    "${WORKING_DIR}/config-files/update_config.sh" --config zsh
 }
 
 #########################################################################
@@ -39,6 +44,7 @@ PACKAGES="vim
           "
 
 perform_task install_packages
+perform_taks install_ohmyzsh
 perform_task install_config_files
 
 check_for_errors
