@@ -45,7 +45,7 @@ PACKAGES="vim
           "
 
 perform_task install_packages
-perform_taks install_ohmyzsh
+perform_task install_ohmyzsh
 perform_task install_config_files
 
 check_for_errors
