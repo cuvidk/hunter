@@ -15,6 +15,7 @@ install_packages() {
 
 install_ohmyzsh() {
     "${WORKING_DIR}/config-files/installers/ohmyzsh.sh" install
+    chsh -s /bin/zsh
 }
 
 install_config_files() {
