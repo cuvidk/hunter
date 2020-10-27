@@ -446,8 +446,6 @@ remove_all() {
 
 WORKING_DIR="$(realpath "$(dirname "${0}")")"
 
-. "${WORKING_DIR}/key.config"
-
 GO_PACKAGE_PATH="/opt/go"
 EYEWITNESS_PATH="/opt/eyewitness"
 ASNLOOKUP_PATH="/opt/asnlookup"
@@ -463,6 +461,10 @@ DNMASSCAN_PATH="/opt/dnmasscan"
 BRUTESPRAY_PATH="/opt/brutespray"
 FAVFREAK_PATH="/opt/favfreak"
 WORDLISTS_PATH="/opt/wordlists"
+
+SHODAN_API_KEY=${SHODAN_API_KEY:-'key-not-provided'}
+CENSYS_API_KEY=${CENSYS_API_KEY:-'key-not-provided'}
+CENSYS_SECRET=${CENSYS_SECRET:-'key-not-provided'}
 
 usage() {
     echo "Usage: ${0} <install|remove> [--user <user_owning_tools>]"
