@@ -2,14 +2,6 @@
 
 ###################### INSTALL ######################
 
-install_golang() {
-    pacman -S --needed --noconfirm go
-    mkdir -p "${GO_PACKAGE_PATH}"
-    chown -R "${g_user}:${g_user}" "${GO_PACKAGE_PATH}"
-    echo "export GOPATH=${GO_PACKAGE_PATH}" >"/etc/profile.d/go.sh"
-    . /etc/profile.d/go.sh
-}
-
 install_metabigor() {
     sudo -H -E -u "${g_user}" go get -u github.com/j3ssie/metabigor
     ln -s "${GO_PACKAGE_PATH}/bin/metabigor" /usr/bin/metabigor
@@ -446,7 +438,11 @@ remove_all() {
 
 WORKING_DIR="$(realpath "$(dirname "${0}")")"
 
-GO_PACKAGE_PATH="/opt/go"
+. "${WORKING_DIR}/config-files/install_paths.sh"
+
+export GOLANG="${PATH_GOLANG}"
+GO_PACKAGE_PATH="${PATH_GOLANG}"
+
 EYEWITNESS_PATH="/opt/eyewitness"
 ASNLOOKUP_PATH="/opt/asnlookup"
 DOMLINK_PATH="/opt/domlink"

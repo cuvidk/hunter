@@ -18,9 +18,14 @@ install_ohmyzsh() {
     chsh -s /bin/zsh
 }
 
+install_golang() {
+    "${WORKING_DIR}/config-files/installers/golang.sh" install
+}
+
 install_config_files() {
     "${WORKING_DIR}/config-files/update_config.sh" --config vim
     "${WORKING_DIR}/config-files/update_config.sh" --config zsh
+    "${WORKING_DIR}/config-files/update_config.sh" --config go
 }
 
 #########################################################################
@@ -46,6 +51,7 @@ PACKAGES="vim
 
 perform_task install_packages
 perform_task install_ohmyzsh
+perform_task install_golang
 perform_task install_config_files
 
 check_for_errors
