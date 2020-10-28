@@ -7,7 +7,7 @@ usage() {
 }
 
 exec_on_vps() {
-    ssh rancher@"${VPS_IP}" ${@}
+    ssh root@"${VPS_IP}" ${@}
 }
 
 main() {
@@ -17,15 +17,9 @@ main() {
         exit 1
     fi
 
-    exec_on_vps sudo mkdir -p "${TERMINFO}"
-    scp -r "${TERMINFO}" rancher@"${VPS_IP}":/home/rancher/terminfo
-    exec_on_vps sudo cp -R /home/rancher/terminfo/x "${TERMINFO}"
-    exec_on_vps rm -rf /home/rancher/terminfo
-
-    echo "export TERMINFO=${TERMINFO}" >./terminfo.sh
-    scp ./terminfo.sh rancher@"${VPS_IP}":/home/rancher
-    rm ./terminfo.sh
-    exec_on_vps sudo mv /home/rancher/terminfo.sh /etc/profile.d/
+    local terminfo_path='/usr/share/terminfo/x/'
+    scp "${terminfo_path}/xterm-kitty" root@"${VPS_IP}":"${terminfo_path}/xterm-kitty"
+    exec_on_vps reboot
 }
 
 main "${@}"
