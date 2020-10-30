@@ -242,7 +242,6 @@ fix_wordlists_owner() {
 }
 
 install_all() {
-    install_golang
     #install_eyewitness
     #install_assetfinder
     install_asnlookup
@@ -273,12 +272,6 @@ install_all() {
 }
 
 ###################### UNINSTALL ######################
-
-remove_golang() {
-    pacman -Rs --noconfirm go
-    rm -rf "${GO_PACKAGE_PATH}"
-    rm -rf /etc/profile.d/go.sh
-}
 
 remove_metabigor() {
     rm -rf /usr/bin/metabigor
@@ -404,7 +397,6 @@ remove_wordlists() {
 }
 
 remove_all() {
-    remove_golang
     #remove_eyewitness
     #remove_assetfinder
     remove_asnlookup
