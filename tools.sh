@@ -432,7 +432,7 @@ WORKING_DIR="$(realpath "$(dirname "${0}")")"
 
 . "${WORKING_DIR}/config-files/install_paths.sh"
 
-export GOLANG="${PATH_GOLANG}"
+export GOPATH="${PATH_GOLANG}"
 GO_PACKAGE_PATH="${PATH_GOLANG}"
 
 EYEWITNESS_PATH="/opt/eyewitness"
