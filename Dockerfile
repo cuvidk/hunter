@@ -7,4 +7,4 @@ RUN pacman -Sy
 COPY . /root/haxing-tools
 RUN ./haxing-tools/prerequisites.sh --verbose
 RUN ./haxing-tools/tools.sh install
-CMD /usr/bin/sh -l
+CMD /usr/bin/zsh -l
