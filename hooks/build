@@ -1,10 +1,18 @@
 #!/bin/bash
 
+CENSYS_API_KEY=${CENSYS_API_KEY:-'no_key_provided'}
+CENSYS_SECRET=${CENSYS_SECRET:-'no_key_provided'}
+SHODAN_API_KEY=${SHODAN_API_KEY:-'no_key_provided'}
+DOCKERFILE_PATH=${DOCKERFILE_PATH:-'./Dockerfile'}
+IMAGE_NAME=${IMAGE_NAME:-'hunter'}
+
 echo "Executing hooks/build"
 echo "################################################"
 echo "CENSYS_API_KEY=${CENSYS_API_KEY}"
 echo "CENSYS_SECRET=${CENSYS_SECRET}"
 echo "SHODAN_API_KEY=${SHODAN_API_KEY}"
+echo "DOCKERFILE_PATH=${DOCKERFILE_PATH}"
+echo "IMAGE_NAME=${IMAGE_NAME}"
 echo "################################################"
 
 docker build --build-arg CENSYS_API_KEY=${CENSYS_API_KEY} \
