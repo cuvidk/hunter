@@ -21,6 +21,7 @@ install_packages() {
               python-pip
               iputils
               iproute2
+              chromium
               "
 
     for package in ${packages}; do
