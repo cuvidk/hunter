@@ -118,8 +118,24 @@ install_amass() {
     ln -s "${GO_PACKAGE_PATH}/bin/amass" /usr/bin/amass
     git clone "https://github.com/OWASP/Amass" "${WORKING_DIR}/Amass"
     mkdir -p "${WORDLISTS_PATH}/amass"
-    cp "${WORKING_DIR}/Amass/examples/wordlists/*" "${WORDLISTS_PATH}/amass"
+    cp -r "${WORKING_DIR}/Amass/examples/wordlists/" "${WORDLISTS_PATH}/amass"
     rm -rf "${WORKING_DIR}/Amass"
+    mkdir -p ~/.config/amass
+    sed "s|ALIENVAULT_API_KEY|${ALIENVAULT_API_KEY}|g" "${WORKING_DIR}/config-tools/config.ini" |
+    sed "s|BINARYEDGE_API_KEY|${BINARYEDGE_API_KEY}|g" |
+    sed "s|CENSYS_API_KEY|${CENSYS_API_KEY}|g" |
+    sed "s|CENSYS_SECRET|${CENSYS_SECRET}|g" |
+    sed "s|CLOUDFARE_API_KEY|${CLOUDFARE_API_KEY}|g" |
+    sed "s|GITHUB_API_KEY|${GITHUB_API_KEY}|g" |
+    sed "s|NETWORKSDB_API_KEY|${NETWORKSDB_API_KEY}|g" |
+    sed "s|PASSIVETOTAL_API_KEY|${PASSIVETOTAL_API_KEY}|g" |
+    sed "s|PASSIVETOTAL_USERNAME|${PASSIVETOTAL_USERNAME}|g" |
+    sed "s|SECURITYTRAILS_API_KEY|${SECURITYTRAILS_API_KEY}|g" |
+    sed "s|SHODAN_API_KEY|${SHODAN_API_KEY}|g" |
+    sed "s|URLSCAN_API_KEY|${URLSCAN_API_KEY}|g" |
+    sed "s|VIRUSTOTAL_API_KEY|${VIRUSTOTAL_API_KEY}|g" |
+    sed "s|WHOISXMLAPI_API_KEY|${WHOISXMLAPI_API_KEY}|g" > ~/.config/amass/config.ini
+    chown -R "${g_user}:${g_user}" ~/.config/amass
 }
 
 install_eyewitness() {
@@ -435,24 +451,35 @@ WORKING_DIR="$(realpath "$(dirname "${0}")")"
 export GOPATH="${PATH_GOLANG}"
 GO_PACKAGE_PATH="${PATH_GOLANG}"
 
-EYEWITNESS_PATH="/opt/eyewitness"
-ASNLOOKUP_PATH="/opt/asnlookup"
-DOMLINK_PATH="/opt/domlink"
-GETRELATIONSHIP_PATH="/opt/getrelationship"
-SUBDOMAINIZER_PATH="/opt/subdomainizer"
-SUBSCRAPER_PATH="/opt/subscraper"
-SHOSUBGO_PATH="/opt/shosubgo"
-GITHUB_SEARCH_PATH="/opt/github-search"
-MASSDNS_PATH="/opt/massdns"
-MASSCAN_PATH="/opt/masscan"
-DNMASSCAN_PATH="/opt/dnmasscan"
-BRUTESPRAY_PATH="/opt/brutespray"
-FAVFREAK_PATH="/opt/favfreak"
-WORDLISTS_PATH="/opt/wordlists"
+EYEWITNESS_PATH='/opt/eyewitness'
+ASNLOOKUP_PATH='/opt/asnlookup'
+DOMLINK_PATH='/opt/domlink'
+GETRELATIONSHIP_PATH='/opt/getrelationship'
+SUBDOMAINIZER_PATH='/opt/subdomainizer'
+SUBSCRAPER_PATH='/opt/subscraper'
+SHOSUBGO_PATH='/opt/shosubgo'
+GITHUB_SEARCH_PATH='/opt/github-search'
+MASSDNS_PATH='/opt/massdns'
+MASSCAN_PATH='/opt/masscan'
+DNMASSCAN_PATH='/opt/dnmasscan'
+BRUTESPRAY_PATH='/opt/brutespray'
+FAVFREAK_PATH='/opt/favfreak'
+WORDLISTS_PATH='/opt/wordlists'
 
-SHODAN_API_KEY=${SHODAN_API_KEY:-'key-not-provided'}
+ALIENVAULT_API_KEY=${ALIENVAULT_API_KEY:-'key-not-provided'}
+BINARYEDGE_API_KEY=${BINARYEDGE_API_KEY:-'key-not-provided'}
 CENSYS_API_KEY=${CENSYS_API_KEY:-'key-not-provided'}
 CENSYS_SECRET=${CENSYS_SECRET:-'key-not-provided'}
+CLOUDFARE_API_KEY=${CLOUDFARE_API_KEY:-'key-not-provided'}
+GITHUB_API_KEY=${GITHUB_API_KEY:-'key-not-provided'}
+NETWORKSDB_API_KEY=${NETWORKSDB_API_KEY:-'key-not-provided'}
+PASSIVETOTAL_API_KEY=${PASSIVETOTAL_API_KEY:-'key-not-provided'}
+PASSIVETOTAL_USERNAME=${PASSIVETOTAL_USERNAME:-'key-not-provided'}
+SECURITYTRAILS_API_KEY=${SECURITYTRAILS_API_KEY:-'key-not-provided'}
+SHODAN_API_KEY=${SHODAN_API_KEY:-'key-not-provided'}
+URLSCAN_API_KEY=${URLSCAN_API_KEY:-'key-not-provided'}
+VIRUSTOTAL_API_KEY=${VIRUSTOTAL_API_KEY:-'key-not-provided'}
+WHOISXMLAPI_API_KEY=${WHOISXMLAPI_API_KEY:-'key-not-provided'}
 
 usage() {
     echo "Usage: ${0} <install|remove> [--user <user_owning_tools>]"

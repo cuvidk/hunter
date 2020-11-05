@@ -1,22 +1,56 @@
 #!/bin/bash
 
-CENSYS_API_KEY=${CENSYS_API_KEY:-'no_key_provided'}
-CENSYS_SECRET=${CENSYS_SECRET:-'no_key_provided'}
-SHODAN_API_KEY=${SHODAN_API_KEY:-'no_key_provided'}
+ALIENVAULT_API_KEY=${ALIENVAULT_API_KEY:-'key-not-provided'}
+BINARYEDGE_API_KEY=${BINARYEDGE_API_KEY:-'key-not-provided'}
+CENSYS_API_KEY=${CENSYS_API_KEY:-'key-not-provided'}
+CENSYS_SECRET=${CENSYS_SECRET:-'key-not-provided'}
+CLOUDFARE_API_KEY=${CLOUDFARE_API_KEY:-'key-not-provided'}
+GITHUB_API_KEY=${GITHUB_API_KEY:-'key-not-provided'}
+NETWORKSDB_API_KEY=${NETWORKSDB_API_KEY:-'key-not-provided'}
+PASSIVETOTAL_API_KEY=${PASSIVETOTAL_API_KEY:-'key-not-provided'}
+PASSIVETOTAL_USERNAME=${PASSIVETOTAL_USERNAME:-'key-not-provided'}
+SECURITYTRAILS_API_KEY=${SECURITYTRAILS_API_KEY:-'key-not-provided'}
+SHODAN_API_KEY=${SHODAN_API_KEY:-'key-not-provided'}
+URLSCAN_API_KEY=${URLSCAN_API_KEY:-'key-not-provided'}
+VIRUSTOTAL_API_KEY=${VIRUSTOTAL_API_KEY:-'key-not-provided'}
+WHOISXMLAPI_API_KEY=${WHOISXMLAPI_API_KEY:-'key-not-provided'}
+
 DOCKERFILE_PATH=${DOCKERFILE_PATH:-'./Dockerfile'}
 IMAGE_NAME=${IMAGE_NAME:-'hunter'}
 
-echo "Executing hooks/build"
 echo "################################################"
+echo "ALIENVAULT_API_KEY=${ALIENVAULT_API_KEY}"
+echo "BINARYEDGE_API_KEY=${BINARYEDGE_API_KEY}"
 echo "CENSYS_API_KEY=${CENSYS_API_KEY}"
 echo "CENSYS_SECRET=${CENSYS_SECRET}"
+echo "CLOUDFARE_API_KEY=${CLOUDFARE_API_KEY}"
+echo "GITHUB_API_KEY=${GITHUB_API_KEY}"
+echo "NETWORKSDB_API_KEY=${NETWORKSDB_API_KEY}"
+echo "PASSIVETOTAL_API_KEY=${PASSIVETOTAL_API_KEY}"
+echo "PASSIVETOTAL_USERNAME=${PASSIVETOTAL_USERNAME}"
+echo "SECURITYTRAILS_API_KEY=${SECURITYTRAILS_API_KEY}"
 echo "SHODAN_API_KEY=${SHODAN_API_KEY}"
+echo "URLSCAN_API_KEY=${URLSCAN_API_KEY}"
+echo "VIRUSTOTAL_API_KEY=${VIRUSTOTAL_API_KEY}"
+echo "WHOISXMLAPI_API_KEY=${WHOISXMLAPI_API_KEY}"
 echo "DOCKERFILE_PATH=${DOCKERFILE_PATH}"
 echo "IMAGE_NAME=${IMAGE_NAME}"
 echo "################################################"
 
-docker build --build-arg CENSYS_API_KEY=${CENSYS_API_KEY} \
-                --build-arg CENSYS_SECRET=${CENSYS_SECRET} \
-                --build-arg SHODAN_API_KEY=${SHODAN_API_KEY} \
-                -f "${DOCKERFILE_PATH}" \
-                -t "${IMAGE_NAME}" .
+docker build \
+    --build-arg ALIENVAULT_API_KEY=${ALIENVAULT_API_KEY} \
+    --build-arg BINARYEDGE_API_KEY=${BINARYEDGE_API_KEY} \
+    --build-arg CENSYS_API_KEY=${CENSYS_API_KEY} \
+    --build-arg CENSYS_SECRET=${CENSYS_SECRET} \
+    --build-arg CLOUDFARE_API_KEY=${CLOUDFARE_API_KEY} \
+    --build-arg GITHUB_API_KEY=${GITHUB_API_KEY} \
+    --build-arg NETWORKSDB_API_KEY=${NETWORKSDB_API_KEY} \
+    --build-arg PASSIVETOTAL_API_KEY=${PASSIVETOTAL_API_KEY} \
+    --build-arg PASSIVETOTAL_USERNAME=${PASSIVETOTAL_USERNAME} \
+    --build-arg SECURITYTRAILS_API_KEY=${SECURITYTRAILS_API_KEY} \
+    --build-arg SHODAN_API_KEY=${SHODAN_API_KEY} \
+    --build-arg URLSCAN_API_KEY=${URLSCAN_API_KEY} \
+    --build-arg VIRUSTOTAL_API_KEY=${VIRUSTOTAL_API_KEY} \
+    --build-arg WHOISXMLAPI_API_KEY=${WHOISXMLAPI_API_KEY} \
+    -f "${DOCKERFILE_PATH}" \
+    -t "${IMAGE_NAME}" .
