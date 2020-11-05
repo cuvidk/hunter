@@ -130,11 +130,14 @@ install_amass() {
     sed "s|NETWORKSDB_API_KEY|${NETWORKSDB_API_KEY}|g" |
     sed "s|PASSIVETOTAL_API_KEY|${PASSIVETOTAL_API_KEY}|g" |
     sed "s|PASSIVETOTAL_USERNAME|${PASSIVETOTAL_USERNAME}|g" |
+    sed "s|RECONDEV_API_KEY|${RECONDEV_API_KEY}|g" |
     sed "s|SECURITYTRAILS_API_KEY|${SECURITYTRAILS_API_KEY}|g" |
     sed "s|SHODAN_API_KEY|${SHODAN_API_KEY}|g" |
     sed "s|URLSCAN_API_KEY|${URLSCAN_API_KEY}|g" |
     sed "s|VIRUSTOTAL_API_KEY|${VIRUSTOTAL_API_KEY}|g" |
-    sed "s|WHOISXMLAPI_API_KEY|${WHOISXMLAPI_API_KEY}|g" > ~/.config/amass/config.ini
+    sed "s|WHOISXMLAPI_API_KEY|${WHOISXMLAPI_API_KEY}|g" |
+    sed "s|ZOOMEYE_USERNAME|${ZOOMEYE_USERNAME}|g" |
+    sed "s|ZOOMEYE_PASSWORD|${ZOOMEYE_PASSWORD}|g" > ~/.config/amass/config.ini
     chown -R "${g_user}:${g_user}" ~/.config/amass
 }
 
@@ -475,11 +478,14 @@ GITHUB_API_KEY=${GITHUB_API_KEY:-'key-not-provided'}
 NETWORKSDB_API_KEY=${NETWORKSDB_API_KEY:-'key-not-provided'}
 PASSIVETOTAL_API_KEY=${PASSIVETOTAL_API_KEY:-'key-not-provided'}
 PASSIVETOTAL_USERNAME=${PASSIVETOTAL_USERNAME:-'key-not-provided'}
+RECONDEV_API_KEY=${RECONDEV_API_KEY:-'key-not-provided'}
 SECURITYTRAILS_API_KEY=${SECURITYTRAILS_API_KEY:-'key-not-provided'}
 SHODAN_API_KEY=${SHODAN_API_KEY:-'key-not-provided'}
 URLSCAN_API_KEY=${URLSCAN_API_KEY:-'key-not-provided'}
 VIRUSTOTAL_API_KEY=${VIRUSTOTAL_API_KEY:-'key-not-provided'}
 WHOISXMLAPI_API_KEY=${WHOISXMLAPI_API_KEY:-'key-not-provided'}
+ZOOMEYE_USERNAME=${ZOOMEYE_USERNAME:-'key-not-provided'}
+ZOOMEYE_PASSWORD=${ZOOMEYE_PASSWORD:-'key-not-provided'}
 
 usage() {
     echo "Usage: ${0} <install|remove> [--user <user_owning_tools>]"
