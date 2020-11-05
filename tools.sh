@@ -117,9 +117,7 @@ install_amass() {
     unset GO111MODULE
     ln -s "${GO_PACKAGE_PATH}/bin/amass" /usr/bin/amass
     git clone "https://github.com/OWASP/Amass" "${WORKING_DIR}/Amass"
-    mkdir -p "${WORDLISTS_PATH}/amass"
-    cp -r "${WORKING_DIR}/Amass/examples/wordlists/" "${WORDLISTS_PATH}"
-    mv "${WORDLISTS_PATH}/wordlists" "${WORDLISTS_PATH}/amass"
+    cp -r "${WORKING_DIR}/Amass/examples/wordlists/" "${WORDLISTS_PATH}/amass"
     rm -rf "${WORKING_DIR}/Amass"
     mkdir -p ~/.config/amass
     sed "s|ALIENVAULT_API_KEY|${ALIENVAULT_API_KEY}|g" "${WORKING_DIR}/config-tools/config.ini" |
@@ -224,12 +222,11 @@ install_medusa() {
 install_brutespray() {
     git clone "https://github.com/x90skysn3k/brutespray.git" "${WORKING_DIR}/brutespray"
     mkdir "${BRUTESPRAY_PATH}"
-    mkdir -p "${WORDLISTS_PATH}/brutespray"
     pip install -r "${WORKING_DIR}/brutespray/requirements.txt"
     cp "${WORKING_DIR}/brutespray/brutespray.py" "${BRUTESPRAY_PATH}"
     chown -R "${g_user}:${g_user}" "${BRUTESPRAY_PATH}"
     ln -s "${BRUTESPRAY_PATH}/brutespray.py" /usr/bin/brutespray
-    cp -R "${WORKING_DIR}/brutespray/wordlist/" "${WORDLISTS_PATH}/brutespray/"
+    cp -r "${WORKING_DIR}/brutespray/wordlist/" "${WORDLISTS_PATH}/brutespray"
     rm -rf "${WORKING_DIR}/brutespray"
 }
 
@@ -258,6 +255,10 @@ install_sqlmap() {
     pacman -S --noconfirm sqlmap
 }
 
+create_wordlist() {
+    mkdir -p "${WORDLISTS_PATH}"
+}
+
 fix_wordlists_owner() {
     chown -R "${g_user}:${g_user}" "${WORDLISTS_PATH}"
 }
@@ -265,6 +266,7 @@ fix_wordlists_owner() {
 install_all() {
     #install_eyewitness
     #install_assetfinder
+    create_wordlist
     install_asnlookup
     install_metabigor
     install_domlink
