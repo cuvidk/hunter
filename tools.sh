@@ -118,7 +118,8 @@ install_amass() {
     ln -s "${GO_PACKAGE_PATH}/bin/amass" /usr/bin/amass
     git clone "https://github.com/OWASP/Amass" "${WORKING_DIR}/Amass"
     mkdir -p "${WORDLISTS_PATH}/amass"
-    cp -r "${WORKING_DIR}/Amass/examples/wordlists/" "${WORDLISTS_PATH}/amass"
+    cp -r "${WORKING_DIR}/Amass/examples/wordlists/" "${WORDLISTS_PATH}"
+    mv "${WORDLISTS_PATH}/wordlists" "${WORDLISTS_PATH}/amass"
     rm -rf "${WORKING_DIR}/Amass"
     mkdir -p ~/.config/amass
     sed "s|ALIENVAULT_API_KEY|${ALIENVAULT_API_KEY}|g" "${WORKING_DIR}/config-tools/config.ini" |
@@ -137,7 +138,8 @@ install_amass() {
     sed "s|VIRUSTOTAL_API_KEY|${VIRUSTOTAL_API_KEY}|g" |
     sed "s|WHOISXMLAPI_API_KEY|${WHOISXMLAPI_API_KEY}|g" |
     sed "s|ZOOMEYE_USERNAME|${ZOOMEYE_USERNAME}|g" |
-    sed "s|ZOOMEYE_PASSWORD|${ZOOMEYE_PASSWORD}|g" > ~/.config/amass/config.ini
+    sed "s|ZOOMEYE_PASSWORD|${ZOOMEYE_PASSWORD}|g" |
+    sed "s|WORDLISTS_PATH|${WORDLISTS_PATH}|g" > ~/.config/amass/config.ini
     chown -R "${g_user}:${g_user}" ~/.config/amass
 }
 
