@@ -7,5 +7,7 @@ PATH_AMASS='/opt/amass'
 PATH_METABIGOR='/opt/metabigor'
 PATH_GOSPIDER='/opt/gospider'
 PATH_HAKRAWLER='/opt/hakrawler'
+PATH_GITHUB_SUBDOMAINS='/opt/github-subdomains'
+PATH_ASSETFINDER='/opt/assetfinder'
 
 PATH_AMASS_CONFIG="${PATH_AMASS}/config.ini"

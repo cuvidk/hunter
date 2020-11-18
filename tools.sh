@@ -72,21 +72,9 @@ install_shosubgo() {
     chown -R "${g_user}:${g_user}" "${SHOSUBGO_PATH}"
 }
 
-install_github_subdomains() {
-    sudo -E -H -u "${g_user}" go get -u github.com/gwen001/github-subdomains
-    ln -s "${GO_PACKAGE_PATH}/bin/github-subdomains" /usr/bin/github-subdomains
-}
-
 install_github_search() {
     git clone "https://github.com/gwen001/github-search.git" "${GITHUB_SEARCH_PATH}"
     chown -R "${g_user}:${g_user}" "${GITHUB_SEARCH_PATH}"
-}
-
-install_assetfinder() {
-    export GO111MODULE=on
-    sudo -H -E -u "${g_user}" go get -u github.com/tomnomnom/assetfinder
-    unset GO111MODULE
-    ln -s "${GO_PACKAGE_PATH}/bin/assetfinder" /usr/bin/assetfinder
 }
 
 install_httprobe() {
@@ -220,7 +208,6 @@ fix_wordlists_owner() {
 
 install_all() {
     #install_eyewitness
-    #install_assetfinder
     create_wordlist
     install_asnlookup
     install_domlink
@@ -228,7 +215,6 @@ install_all() {
     install_subdomainizer
     install_subscraper
     install_shosubgo
-    install_github_subdomains
     install_github_search
     install_httprobe
     install_subfinder
@@ -277,16 +263,8 @@ remove_shosubgo() {
     rm -rf /usr/bin/shosubgo
 }
 
-remove_github_subdomains() {
-    rm -rf /usr/bin/github-subdomains
-}
-
 remove_github_search() {
     rm -rf "${GITHUB_SEARCH_PATH}"
-}
-
-remove_assetfinder() {
-    rm -rf /usr/bin/assetfinder
 }
 
 remove_httprobe() {
@@ -356,14 +334,12 @@ remove_wordlists() {
 
 remove_all() {
     #remove_eyewitness
-    #remove_assetfinder
     remove_asnlookup
     remove_domlink
     remove_getrelationship
     remove_subdomainizer
     remove_subscraper
     remove_shosubgo
-    remove_github_subdomains
     remove_github_search
     remove_httprobe
     remove_amass
