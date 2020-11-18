@@ -2,31 +2,6 @@
 
 ###################### INSTALL ######################
 
-install_asnlookup() {
-    git clone "https://github.com/yassineaboukir/Asnlookup" "${WORKING_DIR}/Asnlookup"
-    pip install -r "${WORKING_DIR}/Asnlookup/requirements.txt"
-    mkdir "${ASNLOOKUP_PATH}"
-    cp "${WORKING_DIR}/Asnlookup/asnlookup.py" "${ASNLOOKUP_PATH}"
-    chmod +x "${ASNLOOKUP_PATH}/asnlookup.py"
-    cp "${WORKING_DIR}/Asnlookup/config.py" "${ASNLOOKUP_PATH}"
-    chown -R "${g_user}:${g_user}" "${ASNLOOKUP_PATH}"
-    ln -s "${ASNLOOKUP_PATH}/asnlookup.py" /usr/bin/asnlookup
-    rm -rf "${WORKING_DIR}/Asnlookup"
-}
-
-install_domlink() {
-    git clone "https://github.com/vysecurity/DomLink.git" "${WORKING_DIR}/DomLink"
-    pip install -r "${WORKING_DIR}/DomLink/requirements.txt"
-    mkdir "${DOMLINK_PATH}"
-    cp "${WORKING_DIR}/DomLink/domLink.py" "${DOMLINK_PATH}"
-    chmod +x "${DOMLINK_PATH}/domLink.py"
-    # API KEY
-    mv "${WORKING_DIR}/DomLink/domLink.cfg.example" "${DOMLINK_PATH}/domLink.cfg"
-    chown -R "${g_user}:${g_user}" "${DOMLINK_PATH}"
-    ln -s "${DOMLINK_PATH}/domLink.py" /usr/bin/domlink
-    rm -rf "${WORKING_DIR}/DomLink"
-}
-
 install_getrelationship() {
     wget "https://raw.githubusercontent.com/m4ll0k/Bug-Bounty-Toolz/master/getrelationship.py"
     mkdir "${GETRELATIONSHIP_PATH}"
@@ -192,8 +167,6 @@ fix_wordlists_owner() {
 install_all() {
     #install_eyewitness
     create_wordlist
-    install_asnlookup
-    install_domlink
     install_getrelationship
     install_subdomainizer
     install_subscraper
@@ -212,16 +185,6 @@ install_all() {
 }
 
 ###################### UNINSTALL ######################
-
-remove_asnlookup() {
-    rm -rf "${ASNLOOKUP_PATH}"
-    rm -rf /usr/bin/asnlookup
-}
-
-remove_domlink() {
-    rm -rf "${DOMLINK_PATH}"
-    rm -rf /usr/bin/domlink
-}
 
 remove_getrelationship() {
     rm -rf "${GETRELATIONSHIP_PATH}"
@@ -302,8 +265,6 @@ remove_wordlists() {
 
 remove_all() {
     #remove_eyewitness
-    remove_asnlookup
-    remove_domlink
     remove_getrelationship
     remove_subdomainizer
     remove_subscraper
@@ -331,8 +292,6 @@ export GOPATH="${PATH_GOLANG}"
 GO_PACKAGE_PATH="${PATH_GOLANG}"
 
 EYEWITNESS_PATH='/opt/eyewitness'
-ASNLOOKUP_PATH='/opt/asnlookup'
-DOMLINK_PATH='/opt/domlink'
 GETRELATIONSHIP_PATH='/opt/getrelationship'
 SUBDOMAINIZER_PATH='/opt/subdomainizer'
 SUBSCRAPER_PATH='/opt/subscraper'
@@ -343,25 +302,6 @@ MASSCAN_PATH='/opt/masscan'
 DNMASSCAN_PATH='/opt/dnmasscan'
 BRUTESPRAY_PATH='/opt/brutespray'
 FAVFREAK_PATH='/opt/favfreak'
-WORDLISTS_PATH='/opt/wordlists'
-
-ALIENVAULT_API_KEY=${ALIENVAULT_API_KEY:-'key-not-provided'}
-BINARYEDGE_API_KEY=${BINARYEDGE_API_KEY:-'key-not-provided'}
-CENSYS_API_KEY=${CENSYS_API_KEY:-'key-not-provided'}
-CENSYS_SECRET=${CENSYS_SECRET:-'key-not-provided'}
-CLOUDFARE_API_KEY=${CLOUDFARE_API_KEY:-'key-not-provided'}
-GITHUB_API_KEY=${GITHUB_API_KEY:-'key-not-provided'}
-NETWORKSDB_API_KEY=${NETWORKSDB_API_KEY:-'key-not-provided'}
-PASSIVETOTAL_API_KEY=${PASSIVETOTAL_API_KEY:-'key-not-provided'}
-PASSIVETOTAL_USERNAME=${PASSIVETOTAL_USERNAME:-'key-not-provided'}
-RECONDEV_API_KEY=${RECONDEV_API_KEY:-'key-not-provided'}
-SECURITYTRAILS_API_KEY=${SECURITYTRAILS_API_KEY:-'key-not-provided'}
-SHODAN_API_KEY=${SHODAN_API_KEY:-'key-not-provided'}
-URLSCAN_API_KEY=${URLSCAN_API_KEY:-'key-not-provided'}
-VIRUSTOTAL_API_KEY=${VIRUSTOTAL_API_KEY:-'key-not-provided'}
-WHOISXMLAPI_API_KEY=${WHOISXMLAPI_API_KEY:-'key-not-provided'}
-ZOOMEYE_USERNAME=${ZOOMEYE_USERNAME:-'key-not-provided'}
-ZOOMEYE_PASSWORD=${ZOOMEYE_PASSWORD:-'key-not-provided'}
 
 usage() {
     echo "Usage: ${0} <install|remove> [--user <user_owning_tools>]"
