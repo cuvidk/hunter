@@ -77,13 +77,6 @@ install_github_search() {
     chown -R "${g_user}:${g_user}" "${GITHUB_SEARCH_PATH}"
 }
 
-install_httprobe() {
-    export GO111MODULE=on
-    sudo -H -E -u "${g_user}" go get -u github.com/tomnomnom/httprobe
-    unset GO111MODULE
-    ln -s "${GO_PACKAGE_PATH}/bin/httprobe" /usr/bin/httprobe
-}
-
 install_eyewitness() {
     git clone https://github.com/cuvidk/EyeWitness.git "${EYEWITNESS_PATH}"
     chown -R "${g_user}:${g_user}" "${EYEWITNESS_PATH}"
@@ -184,16 +177,6 @@ install_favfreak() {
     rm -rf "${WORKING_DIR}/FavFreak"
 }
 
-install_subover() {
-    sudo -H -E -u "${g_user}" go get "github.com/Ice3man543/SubOver"
-    ln -s "${GO_PACKAGE_PATH}/bin/SubOver" /usr/bin/subover
-}
-
-install_ffuf() {
-    sudo -H -E -u "${g_user}" go get "github.com/ffuf/ffuf"
-    ln -s "${GO_PACKAGE_PATH}/bin/ffuf" /usr/bin/ffuf
-}
-
 install_sqlmap() {
     pacman -S --noconfirm sqlmap
 }
@@ -216,7 +199,6 @@ install_all() {
     install_subscraper
     install_shosubgo
     install_github_search
-    install_httprobe
     install_subfinder
     install_massdns
     install_masscan
@@ -225,8 +207,6 @@ install_all() {
     install_medusa
     install_brutespray
     install_favfreak
-    install_subover
-    install_ffuf
     install_sqlmap
     fix_wordlists_owner
 }
@@ -265,10 +245,6 @@ remove_shosubgo() {
 
 remove_github_search() {
     rm -rf "${GITHUB_SEARCH_PATH}"
-}
-
-remove_httprobe() {
-    rm -rf /usr/bin/httprobe
 }
 
 remove_eyewitness() {
@@ -316,14 +292,6 @@ remove_favfreak() {
     rm -rf /usr/bin/favfreak
 }
 
-remove_subover() {
-    rm -rf /usr/bin/subover
-}
-
-remove_ffuf() {
-    rm -rf /usr/bin/ffuf
-}
-
 remove_sqlmap() {
     pacman -Rs --noconfirm sqlmap
 }
@@ -341,8 +309,6 @@ remove_all() {
     remove_subscraper
     remove_shosubgo
     remove_github_search
-    remove_httprobe
-    remove_amass
     remove_subfinder
     remove_massdns
     remove_masscan
@@ -351,8 +317,6 @@ remove_all() {
     remove_medusa
     remove_brutespray
     remove_favfreak
-    remove_subover
-    remove_ffuf
     remove_sqlmap
     remove_wordlists
 }

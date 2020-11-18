@@ -19,6 +19,9 @@ fix_owner() {
     chown -R "${USER}":"${USER}" "${PATH_HAKRAWLER}"
     chown -R "${USER}":"${USER}" "${PATH_GITHUB_SUBDOMAINS}"
     chown -R "${USER}":"${USER}" "${PATH_ASSETFINDER}"
+    chown -R "${USER}":"${USER}" "${PATH_HTTPROBE}"
+    chown -R "${USER}":"${USER}" "${PATH_SUBOVER}"
+    chown -R "${USER}":"${USER}" "${PATH_FFUF}"
 }
 
 main() {
