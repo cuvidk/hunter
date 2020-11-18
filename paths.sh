@@ -2,6 +2,7 @@
 
 PATH_WORDLISTS='/opt/wordlists'
 PATH_AMASS_WORDLISTS="${PATH_WORDLISTS}/amass"
+PATH_BRUTESPRAY_WORDLISTS="${PATH_WORDLISTS}/brutespray"
 
 PATH_AMASS='/opt/amass'
 PATH_METABIGOR='/opt/metabigor'
@@ -18,6 +19,8 @@ PATH_SUBDOMAINIZER='/opt/subdomainizer'
 PATH_SUBFINDER='/opt/subfinder'
 PATH_MASSDNS='/opt/massdns'
 PATH_MASSCAN='/opt/masscan'
+PATH_DNMASSCAN='/opt/dnmasscan'
+PATH_BRUTESPRAY='/opt/brutespray'
 
 PATH_AMASS_CONFIG="${PATH_AMASS}/config.ini"
 PATH_DOMLINK_CONFIG="${PATH_DOMLINK}/domLink.cfg"

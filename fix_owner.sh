@@ -28,6 +28,8 @@ fix_owner() {
     chown -R "${USER}":"${USER}" "${PATH_SUBFINDER}"
     chown -R "${USER}":"${USER}" "${PATH_MASSDNS}"
     chown -R "${USER}":"${USER}" "${PATH_MASSCAN}"
+    chown -R "${USER}":"${USER}" "${PATH_DNMASSCAN}"
+    chown -R "${USER}":"${USER}" "${PATH_BRUTESPRAY}"
 }
 
 main() {

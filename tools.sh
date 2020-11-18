@@ -66,32 +66,12 @@ install_eyewitness() {
     #done
 }
 
-install_dnmasscan() {
-    git clone "https://github.com/rastating/dnmasscan.git" "${WORKING_DIR}/dnmasscan"
-    mkdir "${DNMASSCAN_PATH}"
-    cp "${WORKING_DIR}/dnmasscan/dnmasscan" "${DNMASSCAN_PATH}"
-    chown -R "${g_user}:${g_user}" "${DNMASSCAN_PATH}"
-    ln -s "${DNMASSCAN_PATH}/dnmasscan" /usr/bin/dnmasscan
-    rm -rf "${WORKING_DIR}/dnmasscan"
-}
-
 install_nmap() {
     pacman -S --noconfirm nmap
 }
 
 install_medusa() {
     pacman -S --noconfirm medusa
-}
-
-install_brutespray() {
-    git clone "https://github.com/x90skysn3k/brutespray.git" "${WORKING_DIR}/brutespray"
-    mkdir "${BRUTESPRAY_PATH}"
-    pip install -r "${WORKING_DIR}/brutespray/requirements.txt"
-    cp "${WORKING_DIR}/brutespray/brutespray.py" "${BRUTESPRAY_PATH}"
-    chown -R "${g_user}:${g_user}" "${BRUTESPRAY_PATH}"
-    ln -s "${BRUTESPRAY_PATH}/brutespray.py" /usr/bin/brutespray
-    cp -r "${WORKING_DIR}/brutespray/wordlist/" "${WORDLISTS_PATH}/brutespray"
-    rm -rf "${WORKING_DIR}/brutespray"
 }
 
 install_favfreak() {
@@ -124,10 +104,8 @@ install_all() {
     install_subscraper
     install_shosubgo
     install_github_search
-    install_dnmasscan
     install_nmap
     install_medusa
-    install_brutespray
     install_favfreak
     install_sqlmap
     fix_wordlists_owner
@@ -162,22 +140,12 @@ remove_eyewitness() {
     # because a lot of them may be required by other software
 }
 
-remove_dnmasscan() {
-    rm -rf "${DNMASSCAN_PATH}"
-    rm -rf /usr/bin/dnmasscan
-}
-
 remove_nmap() {
     pacman -Rs --noconfirm nmap
 }
 
 remove_medusa() {
     pacman -Rs --noconfirm medusa
-}
-
-remove_brutespray() {
-    rm -rf "${BRUTESPRAY_PATH}"
-    rm -rf /usr/bin/brutespray
 }
 
 remove_favfreak() {
@@ -199,10 +167,8 @@ remove_all() {
     remove_subscraper
     remove_shosubgo
     remove_github_search
-    remove_dnmasscan
     remove_nmap
     remove_medusa
-    remove_brutespray
     remove_favfreak
     remove_sqlmap
     remove_wordlists
@@ -222,8 +188,6 @@ GETRELATIONSHIP_PATH='/opt/getrelationship'
 SUBSCRAPER_PATH='/opt/subscraper'
 SHOSUBGO_PATH='/opt/shosubgo'
 GITHUB_SEARCH_PATH='/opt/github-search'
-DNMASSCAN_PATH='/opt/dnmasscan'
-BRUTESPRAY_PATH='/opt/brutespray'
 FAVFREAK_PATH='/opt/favfreak'
 
 usage() {
