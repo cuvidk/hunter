@@ -2,15 +2,6 @@
 
 ###################### INSTALL ######################
 
-install_getrelationship() {
-    wget "https://raw.githubusercontent.com/m4ll0k/Bug-Bounty-Toolz/master/getrelationship.py"
-    mkdir "${GETRELATIONSHIP_PATH}"
-    mv getrelationship.py "${GETRELATIONSHIP_PATH}/getrelationship.py"
-    chmod +x "${GETRELATIONSHIP_PATH}/getrelationship.py"
-    chown -R "${g_user}:${g_user}" "${GETRELATIONSHIP_PATH}"
-    ln -s "${GETRELATIONSHIP_PATH}/getrelationship.py" /usr/bin/getrelationship
-}
-
 install_subscraper() {
     git clone "https://github.com/m8r0wn/subscraper" "${WORKING_DIR}/subscraper"
     cd "${WORKING_DIR}/subscraper"
@@ -74,17 +65,6 @@ install_medusa() {
     pacman -S --noconfirm medusa
 }
 
-install_favfreak() {
-    git clone "https://github.com/devanshbatham/FavFreak" "${WORKING_DIR}/FavFreak"
-    mkdir "${FAVFREAK_PATH}"
-    pip install -r "${WORKING_DIR}/FavFreak/requirements.txt"
-    cp "${WORKING_DIR}/FavFreak/favfreak.py" "${FAVFREAK_PATH}"
-    chmod +x "${FAVFREAK_PATH}/favfreak.py"
-    chown -R "${g_user}:${g_user}" "${FAVFREAK_PATH}"
-    ln -s "${FAVFREAK_PATH}/favfreak.py" /usr/bin/favfreak
-    rm -rf "${WORKING_DIR}/FavFreak"
-}
-
 install_sqlmap() {
     pacman -S --noconfirm sqlmap
 }
@@ -100,23 +80,16 @@ fix_wordlists_owner() {
 install_all() {
     #install_eyewitness
     create_wordlist
-    install_getrelationship
     install_subscraper
     install_shosubgo
     install_github_search
     install_nmap
     install_medusa
-    install_favfreak
     install_sqlmap
     fix_wordlists_owner
 }
 
 ###################### UNINSTALL ######################
-
-remove_getrelationship() {
-    rm -rf "${GETRELATIONSHIP_PATH}"
-    rm -rf /usr/bin/getrelationship
-}
 
 remove_subscraper() {
     rm -rf "${SUBSCRAPER_PATH}"
@@ -148,11 +121,6 @@ remove_medusa() {
     pacman -Rs --noconfirm medusa
 }
 
-remove_favfreak() {
-    rm -rf "${FAVFREAK_PATH}"
-    rm -rf /usr/bin/favfreak
-}
-
 remove_sqlmap() {
     pacman -Rs --noconfirm sqlmap
 }
@@ -163,13 +131,11 @@ remove_wordlists() {
 
 remove_all() {
     #remove_eyewitness
-    remove_getrelationship
     remove_subscraper
     remove_shosubgo
     remove_github_search
     remove_nmap
     remove_medusa
-    remove_favfreak
     remove_sqlmap
     remove_wordlists
 }
@@ -184,11 +150,9 @@ export GOPATH="${PATH_GOLANG}"
 GO_PACKAGE_PATH="${PATH_GOLANG}"
 
 EYEWITNESS_PATH='/opt/eyewitness'
-GETRELATIONSHIP_PATH='/opt/getrelationship'
 SUBSCRAPER_PATH='/opt/subscraper'
 SHOSUBGO_PATH='/opt/shosubgo'
 GITHUB_SEARCH_PATH='/opt/github-search'
-FAVFREAK_PATH='/opt/favfreak'
 
 usage() {
     echo "Usage: ${0} <install|remove> [--user <user_owning_tools>]"

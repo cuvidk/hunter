@@ -21,6 +21,8 @@ PATH_MASSDNS='/opt/massdns'
 PATH_MASSCAN='/opt/masscan'
 PATH_DNMASSCAN='/opt/dnmasscan'
 PATH_BRUTESPRAY='/opt/brutespray'
+PATH_GETRELATIONSHIP='/opt/getrelationship'
+PATH_FAVFREAK='/opt/favfreak'
 
 PATH_AMASS_CONFIG="${PATH_AMASS}/config.ini"
 PATH_DOMLINK_CONFIG="${PATH_DOMLINK}/domLink.cfg"
