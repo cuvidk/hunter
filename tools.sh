@@ -66,17 +66,6 @@ install_eyewitness() {
     #done
 }
 
-install_subfinder() {
-    local version="2.4.5"
-    mkdir "${WORKING_DIR}/subfinder"
-    cd "${WORKING_DIR}/subfinder"
-    wget "https://github.com/projectdiscovery/subfinder/releases/download/v${version}/subfinder_${version}_linux_amd64.tar.gz"
-    tar -xzvf "subfinder_${version}_linux_amd64.tar.gz"
-    mv subfinder /usr/bin/
-    cd -
-    rm -rf "${WORKING_DIR}/subfinder"
-}
-
 install_massdns() {
     git clone 'https://github.com/blechschmidt/massdns.git' "${WORKING_DIR}/massdns"
     cd "${WORKING_DIR}/massdns"
@@ -160,7 +149,6 @@ install_all() {
     install_subscraper
     install_shosubgo
     install_github_search
-    install_subfinder
     install_massdns
     install_masscan
     install_dnmasscan
@@ -199,10 +187,6 @@ remove_eyewitness() {
     # eyewitness has a custom installer that installs
     # a lot of dependencies; I cannot delete those manually
     # because a lot of them may be required by other software
-}
-
-remove_subfinder() {
-    rm -rf /usr/bin/subfinder
 }
 
 remove_massdns() {
@@ -252,7 +236,6 @@ remove_all() {
     remove_subscraper
     remove_shosubgo
     remove_github_search
-    remove_subfinder
     remove_massdns
     remove_masscan
     remove_dnmasscan
