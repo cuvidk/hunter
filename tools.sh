@@ -11,17 +11,6 @@ install_getrelationship() {
     ln -s "${GETRELATIONSHIP_PATH}/getrelationship.py" /usr/bin/getrelationship
 }
 
-install_subdomainizer() {
-    git clone "https://github.com/nsonaniya2010/SubDomainizer.git" "${WORKING_DIR}/SubDomainizer"
-    pip install -r "${WORKING_DIR}/SubDomainizer/requirements.txt"
-    mkdir "${SUBDOMAINIZER_PATH}"
-    cp "${WORKING_DIR}/SubDomainizer/SubDomainizer.py" "${SUBDOMAINIZER_PATH}"
-    chmod +x "${SUBDOMAINIZER_PATH}/SubDomainizer.py"
-    chown -R "${g_user}:${g_user}" "${SUBDOMAINIZER_PATH}"
-    ln -s "${SUBDOMAINIZER_PATH}/SubDomainizer.py" /usr/bin/subdomainizer
-    rm -rf "${WORKING_DIR}/SubDomainizer"
-}
-
 install_subscraper() {
     git clone "https://github.com/m8r0wn/subscraper" "${WORKING_DIR}/subscraper"
     cd "${WORKING_DIR}/subscraper"
@@ -168,7 +157,6 @@ install_all() {
     #install_eyewitness
     create_wordlist
     install_getrelationship
-    install_subdomainizer
     install_subscraper
     install_shosubgo
     install_github_search
@@ -189,11 +177,6 @@ install_all() {
 remove_getrelationship() {
     rm -rf "${GETRELATIONSHIP_PATH}"
     rm -rf /usr/bin/getrelationship
-}
-
-remove_subdomainizer() {
-    rm -rf "${SUBDOMAINIZER_PATH}"
-    rm -rf /usr/bin/subdomainizer
 }
 
 remove_subscraper() {
@@ -266,7 +249,6 @@ remove_wordlists() {
 remove_all() {
     #remove_eyewitness
     remove_getrelationship
-    remove_subdomainizer
     remove_subscraper
     remove_shosubgo
     remove_github_search
@@ -293,7 +275,6 @@ GO_PACKAGE_PATH="${PATH_GOLANG}"
 
 EYEWITNESS_PATH='/opt/eyewitness'
 GETRELATIONSHIP_PATH='/opt/getrelationship'
-SUBDOMAINIZER_PATH='/opt/subdomainizer'
 SUBSCRAPER_PATH='/opt/subscraper'
 SHOSUBGO_PATH='/opt/shosubgo'
 GITHUB_SEARCH_PATH='/opt/github-search'

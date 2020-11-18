@@ -22,6 +22,9 @@ fix_owner() {
     chown -R "${USER}":"${USER}" "${PATH_HTTPROBE}"
     chown -R "${USER}":"${USER}" "${PATH_SUBOVER}"
     chown -R "${USER}":"${USER}" "${PATH_FFUF}"
+    chown -R "${USER}":"${USER}" "${PATH_ASNLOOKUP}"
+    chown -R "${USER}":"${USER}" "${PATH_DOMLINK}"
+    chown -R "${USER}":"${USER}" "${PATH_SUBDOMAINIZER}"
 }
 
 main() {
