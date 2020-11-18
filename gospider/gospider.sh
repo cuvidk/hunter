@@ -13,17 +13,17 @@ pre_install() {
 
 install() {(
     set -e
-    go get -u github.com/j3ssie/metabigor
-    mkdir -p "${PATH_METABIGOR}"
-    ln -s "${GOPATH}/bin/metabigor" "${PATH_METABIGOR}/metabigor"
-    ln -s "${PATH_METABIGOR}/metabigor" /usr/bin/metabigor
+    go get -u github.com/jaeles-project/gospider
+    mkdir -p "${PATH_GOSPIDER}"
+    ln -s "${GOPATH}/bin/gospider" "${PATH_GOSPIDER}/gospider"
+    ln -s "${PATH_GOSPIDER}/gospider" /usr/bin/gospider
 )}
 
 uninstall() {(
     set -e
-    rm -rf /usr/bin/metabigor
-    rm -rf "${PATH_METABIGOR}"
-    rm -rf "${GOPATH}/bin/metabigor"
+    rm -rf /usr/bin/gospider
+    rm -rf "${PATH_GOSPIDER}"
+    rm -rf "${GOPATH}/bin/gospider"
 )}
 
 post_uninstall() {
@@ -40,10 +40,10 @@ main() {
     case "${1}" in
         "install")
             perform_task pre_install
-            perform_task install 'installing metabigor'
+            perform_task install 'installing gospider'
             ;;
         "uninstall")
-            perform_task uninstall 'uninstalling metabigor'
+            perform_task uninstall 'uninstalling gospider'
             perform_task post_uninstall
             ;;
         *)

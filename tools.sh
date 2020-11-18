@@ -36,16 +36,6 @@ install_getrelationship() {
     ln -s "${GETRELATIONSHIP_PATH}/getrelationship.py" /usr/bin/getrelationship
 }
 
-install_gospider() {
-    sudo -E -H -u "${g_user}" go get -u github.com/jaeles-project/gospider
-    ln -s "${GO_PACKAGE_PATH}/bin/gospider" /usr/bin/gospider
-}
-
-install_hakrawler() {
-    sudo -E -H -u "${g_user}" go get -u github.com/hakluke/hakrawler
-    ln -s "${GO_PACKAGE_PATH}/bin/hakrawler" /usr/bin/hakrawler
-}
-
 install_subdomainizer() {
     git clone "https://github.com/nsonaniya2010/SubDomainizer.git" "${WORKING_DIR}/SubDomainizer"
     pip install -r "${WORKING_DIR}/SubDomainizer/requirements.txt"
@@ -235,8 +225,6 @@ install_all() {
     install_asnlookup
     install_domlink
     install_getrelationship
-    install_gospider
-    install_hakrawler
     install_subdomainizer
     install_subscraper
     install_shosubgo
@@ -272,14 +260,6 @@ remove_domlink() {
 remove_getrelationship() {
     rm -rf "${GETRELATIONSHIP_PATH}"
     rm -rf /usr/bin/getrelationship
-}
-
-remove_gospider() {
-    rm -rf /usr/bin/gospider
-}
-
-remove_hakrawler() {
-    rm -rf /usr/bin/hakrawler
 }
 
 remove_subdomainizer() {
@@ -380,8 +360,6 @@ remove_all() {
     remove_asnlookup
     remove_domlink
     remove_getrelationship
-    remove_gospider
-    remove_hakrawler
     remove_subdomainizer
     remove_subscraper
     remove_shosubgo

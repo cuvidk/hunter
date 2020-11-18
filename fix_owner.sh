@@ -15,6 +15,8 @@ fix_owner() {
     chown -R "${USER}":"${USER}" "${PATH_AMASS}"
     chown -R "${USER}":"${USER}" "${PATH_AMASS_CONFIG}"
     chown -R "${USER}":"${USER}" "${PATH_METABIGOR}"
+    chown -R "${USER}":"${USER}" "${PATH_GOSPIDER}"
+    chown -R "${USER}":"${USER}" "${PATH_HAKRAWLER}"
 }
 
 main() {

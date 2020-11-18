@@ -5,8 +5,9 @@ SCRIPT_DIR="$(realpath "$(dirname "${0}")")"
 . "${SCRIPT_DIR}/../config-files/paths.sh"
 . "${SCRIPT_DIR}/../paths.sh"
 
+export GOPATH="${GOPATH:-${PATH_GOLANG}}"
+
 pre_install() {
-    export GOPATH="${GOPATH:-${PATH_GOLANG}}"
     "${SCRIPT_DIR}/../config-files/go/go.sh" install ${VERBOSE}
 }
 
