@@ -18,15 +18,6 @@ install_subscraper() {
     rm -rf "${WORKING_DIR}/subscraper"
 }
 
-install_shosubgo() {
-    git clone "https://github.com/incogbyte/shosubgo" "${SHOSUBGO_PATH}"
-    echo '#!/bin/sh' >"${SHOSUBGO_PATH}/shosubgo.sh"
-    echo "go run ${SHOSUBGO_PATH}/main.go -s ${SHODAN_API_KEY}" '${@}' >>"${SHOSUBGO_PATH}/shosubgo.sh"
-    chmod +x "${SHOSUBGO_PATH}/shosubgo.sh"
-    ln -s "${SHOSUBGO_PATH}/shosubgo.sh" /usr/bin/shosubgo
-    chown -R "${g_user}:${g_user}" "${SHOSUBGO_PATH}"
-}
-
 install_github_search() {
     git clone "https://github.com/gwen001/github-search.git" "${GITHUB_SEARCH_PATH}"
     chown -R "${g_user}:${g_user}" "${GITHUB_SEARCH_PATH}"
@@ -81,7 +72,6 @@ install_all() {
     #install_eyewitness
     create_wordlist
     install_subscraper
-    install_shosubgo
     install_github_search
     install_nmap
     install_medusa
@@ -94,11 +84,6 @@ install_all() {
 remove_subscraper() {
     rm -rf "${SUBSCRAPER_PATH}"
     rm -rf /usr/bin/subscraper
-}
-
-remove_shosubgo() {
-    rm -rf "${SHOSUBGO_PATH}"
-    rm -rf /usr/bin/shosubgo
 }
 
 remove_github_search() {
@@ -132,7 +117,6 @@ remove_wordlists() {
 remove_all() {
     #remove_eyewitness
     remove_subscraper
-    remove_shosubgo
     remove_github_search
     remove_nmap
     remove_medusa
@@ -151,7 +135,6 @@ GO_PACKAGE_PATH="${PATH_GOLANG}"
 
 EYEWITNESS_PATH='/opt/eyewitness'
 SUBSCRAPER_PATH='/opt/subscraper'
-SHOSUBGO_PATH='/opt/shosubgo'
 GITHUB_SEARCH_PATH='/opt/github-search'
 
 usage() {
