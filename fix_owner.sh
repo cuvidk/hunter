@@ -25,6 +25,9 @@ fix_owner() {
     chown -R "${USER}":"${USER}" "${PATH_ASNLOOKUP}"
     chown -R "${USER}":"${USER}" "${PATH_DOMLINK}"
     chown -R "${USER}":"${USER}" "${PATH_SUBDOMAINIZER}"
+    chown -R "${USER}":"${USER}" "${PATH_SUBFINDER}"
+    chown -R "${USER}":"${USER}" "${PATH_MASSDNS}"
+    chown -R "${USER}":"${USER}" "${PATH_MASSCAN}"
 }
 
 main() {

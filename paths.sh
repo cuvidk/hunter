@@ -16,6 +16,8 @@ PATH_ASNLOOKUP='/opt/asnlookup'
 PATH_DOMLINK='/opt/domlink'
 PATH_SUBDOMAINIZER='/opt/subdomainizer'
 PATH_SUBFINDER='/opt/subfinder'
+PATH_MASSDNS='/opt/massdns'
+PATH_MASSCAN='/opt/masscan'
 
 PATH_AMASS_CONFIG="${PATH_AMASS}/config.ini"
 PATH_DOMLINK_CONFIG="${PATH_DOMLINK}/domLink.cfg"

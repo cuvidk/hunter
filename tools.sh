@@ -66,31 +66,6 @@ install_eyewitness() {
     #done
 }
 
-install_massdns() {
-    git clone 'https://github.com/blechschmidt/massdns.git' "${WORKING_DIR}/massdns"
-    cd "${WORKING_DIR}/massdns"
-    make
-    mkdir "${MASSDNS_PATH}"
-    cp "${WORKING_DIR}/massdns/bin/massdns" "${MASSDNS_PATH}"
-    cp -R "${WORKING_DIR}/massdns/lists" "${MASSDNS_PATH}"
-    chown -R "${g_user}:${g_user}" "${MASSDNS_PATH}"
-    ln -s "${MASSDNS_PATH}/massdns" /usr/bin/massdns
-    cd -
-    rm -rf "${WORKING_DIR}/massdns"
-}
-
-install_masscan() {
-    git clone 'https://github.com/robertdavidgraham/masscan' "${WORKING_DIR}/masscan"
-    cd "${WORKING_DIR}/masscan"
-    make
-    mkdir "${MASSCAN_PATH}"
-    cp "${WORKING_DIR}/masscan/bin/masscan" "${MASSCAN_PATH}"
-    chown -R "${g_user}:${g_user}" "${MASSCAN_PATH}"
-    ln -s "${MASSCAN_PATH}/masscan" /usr/bin/masscan
-    cd -
-    rm -rf "${WORKING_DIR}/masscan"
-}
-
 install_dnmasscan() {
     git clone "https://github.com/rastating/dnmasscan.git" "${WORKING_DIR}/dnmasscan"
     mkdir "${DNMASSCAN_PATH}"
@@ -149,8 +124,6 @@ install_all() {
     install_subscraper
     install_shosubgo
     install_github_search
-    install_massdns
-    install_masscan
     install_dnmasscan
     install_nmap
     install_medusa
@@ -187,16 +160,6 @@ remove_eyewitness() {
     # eyewitness has a custom installer that installs
     # a lot of dependencies; I cannot delete those manually
     # because a lot of them may be required by other software
-}
-
-remove_massdns() {
-    rm -rf "${MASSDNS_PATH}"
-    rm -rf /usr/bin/massdns
-}
-
-remove_masscan() {
-    rm -rf "${MASSCAN_PATH}"
-    rm -rf /usb/bin/masscan
 }
 
 remove_dnmasscan() {
@@ -236,8 +199,6 @@ remove_all() {
     remove_subscraper
     remove_shosubgo
     remove_github_search
-    remove_massdns
-    remove_masscan
     remove_dnmasscan
     remove_nmap
     remove_medusa
@@ -261,8 +222,6 @@ GETRELATIONSHIP_PATH='/opt/getrelationship'
 SUBSCRAPER_PATH='/opt/subscraper'
 SHOSUBGO_PATH='/opt/shosubgo'
 GITHUB_SEARCH_PATH='/opt/github-search'
-MASSDNS_PATH='/opt/massdns'
-MASSCAN_PATH='/opt/masscan'
 DNMASSCAN_PATH='/opt/dnmasscan'
 BRUTESPRAY_PATH='/opt/brutespray'
 FAVFREAK_PATH='/opt/favfreak'
