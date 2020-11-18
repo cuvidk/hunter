@@ -6,19 +6,19 @@ SCRIPT_DIR="$(realpath "$(dirname "${0}")")"
 . "${SCRIPT_DIR}/../paths.sh"
 
 pre_install() {
+    export GOPATH="${GOPATH:-${PATH_GOLANG}}"
     "${SCRIPT_DIR}/../config-files/go/go.sh" install ${VERBOSE}
 }
 
 install() {(
     set -e
 
-    export GOPATH="${PATH_GOLANG}"
     export GO111MODULE=on
     go get -v github.com/OWASP/Amass/v3/...
 
     mkdir -p "${PATH_AMASS}"
     echo '#!/bin/sh' >"${PATH_AMASS}/amass.sh"
-    echo "${GOPATH}/bin/amass -dir ${PATH_AMASS}" '${@}' >>"${PATH_AMASS}/amass.sh"
+    echo "${GOPATH}/bin/amass" '${@}' "-dir ${PATH_AMASS}" >>"${PATH_AMASS}/amass.sh"
     chmod +x "${PATH_AMASS}/amass.sh"
     ln -s "${PATH_AMASS}/amass.sh" /usr/bin/amass
 
@@ -39,6 +39,7 @@ uninstall() {(
     rm -rf /usr/bin/amass
     rm -rf "${PATH_AMASS}"
     rm -rf "${PATH_AMASS_WORDLISTS}"
+    rm -rf "${GOPATH}/bin/amass"
 )}
 
 post_uninstall() {(

@@ -2,11 +2,6 @@
 
 ###################### INSTALL ######################
 
-install_metabigor() {
-    sudo -H -E -u "${g_user}" go get -u github.com/j3ssie/metabigor
-    ln -s "${GO_PACKAGE_PATH}/bin/metabigor" /usr/bin/metabigor
-}
-
 install_asnlookup() {
     git clone "https://github.com/yassineaboukir/Asnlookup" "${WORKING_DIR}/Asnlookup"
     pip install -r "${WORKING_DIR}/Asnlookup/requirements.txt"
@@ -109,36 +104,6 @@ install_httprobe() {
     sudo -H -E -u "${g_user}" go get -u github.com/tomnomnom/httprobe
     unset GO111MODULE
     ln -s "${GO_PACKAGE_PATH}/bin/httprobe" /usr/bin/httprobe
-}
-
-install_amass() {
-    export GO111MODULE=on
-    sudo -H -E -u "${g_user}" go get -v github.com/OWASP/Amass/v3/...
-    unset GO111MODULE
-    ln -s "${GO_PACKAGE_PATH}/bin/amass" /usr/bin/amass
-    git clone "https://github.com/OWASP/Amass" "${WORKING_DIR}/Amass"
-    cp -r "${WORKING_DIR}/Amass/examples/wordlists/" "${WORDLISTS_PATH}/amass"
-    rm -rf "${WORKING_DIR}/Amass"
-    mkdir -p ~/.config/amass
-    sed "s|ALIENVAULT_API_KEY|${ALIENVAULT_API_KEY}|g" "${WORKING_DIR}/config-tools/config.ini" |
-    sed "s|BINARYEDGE_API_KEY|${BINARYEDGE_API_KEY}|g" |
-    sed "s|CENSYS_API_KEY|${CENSYS_API_KEY}|g" |
-    sed "s|CENSYS_SECRET|${CENSYS_SECRET}|g" |
-    sed "s|CLOUDFARE_API_KEY|${CLOUDFARE_API_KEY}|g" |
-    sed "s|GITHUB_API_KEY|${GITHUB_API_KEY}|g" |
-    sed "s|NETWORKSDB_API_KEY|${NETWORKSDB_API_KEY}|g" |
-    sed "s|PASSIVETOTAL_API_KEY|${PASSIVETOTAL_API_KEY}|g" |
-    sed "s|PASSIVETOTAL_USERNAME|${PASSIVETOTAL_USERNAME}|g" |
-    sed "s|RECONDEV_API_KEY|${RECONDEV_API_KEY}|g" |
-    sed "s|SECURITYTRAILS_API_KEY|${SECURITYTRAILS_API_KEY}|g" |
-    sed "s|SHODAN_API_KEY|${SHODAN_API_KEY}|g" |
-    sed "s|URLSCAN_API_KEY|${URLSCAN_API_KEY}|g" |
-    sed "s|VIRUSTOTAL_API_KEY|${VIRUSTOTAL_API_KEY}|g" |
-    sed "s|WHOISXMLAPI_API_KEY|${WHOISXMLAPI_API_KEY}|g" |
-    sed "s|ZOOMEYE_USERNAME|${ZOOMEYE_USERNAME}|g" |
-    sed "s|ZOOMEYE_PASSWORD|${ZOOMEYE_PASSWORD}|g" |
-    sed "s|WORDLISTS_PATH|${WORDLISTS_PATH}|g" > ~/.config/amass/config.ini
-    chown -R "${g_user}:${g_user}" ~/.config/amass
 }
 
 install_eyewitness() {
@@ -268,7 +233,6 @@ install_all() {
     #install_assetfinder
     create_wordlist
     install_asnlookup
-    install_metabigor
     install_domlink
     install_getrelationship
     install_gospider
@@ -279,7 +243,6 @@ install_all() {
     install_github_subdomains
     install_github_search
     install_httprobe
-    install_amass
     install_subfinder
     install_massdns
     install_masscan
@@ -295,10 +258,6 @@ install_all() {
 }
 
 ###################### UNINSTALL ######################
-
-remove_metabigor() {
-    rm -rf /usr/bin/metabigor
-}
 
 remove_asnlookup() {
     rm -rf "${ASNLOOKUP_PATH}"
@@ -352,10 +311,6 @@ remove_assetfinder() {
 
 remove_httprobe() {
     rm -rf /usr/bin/httprobe
-}
-
-remove_amass() {
-    rm -rf /usr/bin/amass
 }
 
 remove_eyewitness() {
@@ -423,7 +378,6 @@ remove_all() {
     #remove_eyewitness
     #remove_assetfinder
     remove_asnlookup
-    remove_metabigor
     remove_domlink
     remove_getrelationship
     remove_gospider
