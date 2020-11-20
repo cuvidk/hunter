@@ -5,17 +5,22 @@ SCRIPT_DIR="$(realpath "$(dirname "${0}")")"
 . "${SCRIPT_DIR}/../config-files/paths.sh"
 . "${SCRIPT_DIR}/../paths.sh"
 
+pre_install() {
+    git clone 'https://github.com/robertdavidgraham/masscan' "${SCRIPT_DIR}/masscan"
+}
+
 install() {(
     set -e
-    git clone 'https://github.com/robertdavidgraham/masscan' "${SCRIPT_DIR}/masscan"
     cd "${SCRIPT_DIR}/masscan"
     make
     mkdir -p "${PATH_MASSCAN}"
     cp "${SCRIPT_DIR}/masscan/bin/masscan" "${PATH_MASSCAN}"
     ln -s "${PATH_MASSCAN}/masscan" /usr/bin/masscan
-    cd -
-    rm -rf "${SCRIPT_DIR}/masscan"
 )}
+
+post_install() {
+    rm -rf "${SCRIPT_DIR}/masscan"
+}
 
 uninstall() {(
     set -e
@@ -32,7 +37,9 @@ main() {
 
     case "${1}" in
         "install")
+            perform_task pre_install
             perform_task install 'installing masscan'
+            perform_task post_install
             ;;
         "uninstall")
             perform_task uninstall 'uninstalling masscan'

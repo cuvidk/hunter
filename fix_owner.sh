@@ -35,6 +35,7 @@ fix_owner() {
     chown -R "${USER}":"${USER}" "${PATH_SHOSUBGO}"
     chown -R "${USER}":"${USER}" "${PATH_SUBSCRAPER}"
     chown -R "${USER}":"${USER}" "${PATH_EYEWITNESS}"
+    chown -R "${USER}":"${USER}" "${PATH_GITHUB_SEARCH}"
 }
 
 main() {

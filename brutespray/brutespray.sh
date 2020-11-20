@@ -9,18 +9,21 @@ pre_install() {(
     set -e
     pacman -S --noconfirm --needed medusa
     pacman -S --noconfirm --needed python-pip
+    git clone "https://github.com/x90skysn3k/brutespray.git" "${SCRIPT_DIR}/brutespray"
 )}
 
 install() {(
     set -e
-    git clone "https://github.com/x90skysn3k/brutespray.git" "${SCRIPT_DIR}/brutespray"
     mkdir -p "${PATH_BRUTESPRAY}"
     pip install -r "${SCRIPT_DIR}/brutespray/requirements.txt"
     cp "${SCRIPT_DIR}/brutespray/brutespray.py" "${PATH_BRUTESPRAY}"
     ln -s "${PATH_BRUTESPRAY}/brutespray.py" /usr/bin/brutespray
     cp -r "${SCRIPT_DIR}/brutespray/wordlist/" "${PATH_BRUTESPRAY_WORDLISTS}"
-    rm -rf "${SCRIPT_DIR}/brutespray"
 )}
+
+post_install() {
+    rm -rf "${SCRIPT_DIR}/brutespray"
+}
 
 uninstall() {(
     set -e
@@ -46,6 +49,7 @@ main() {
         "install")
             perform_task pre_install 'preinstall brutespray'
             perform_task install 'installing brutespray'
+            perform_task post_install
             ;;
         "uninstall")
             perform_task uninstall 'uninstalling brutespray'

@@ -7,18 +7,21 @@ SCRIPT_DIR="$(realpath "$(dirname "${0}")")"
 
 pre_install() {
     pacman -S --noconfirm --needed python-pip
+    git clone "https://github.com/nsonaniya2010/SubDomainizer.git" "${SCRIPT_DIR}/SubDomainizer"
 }
 
 install() {(
     set -e
-    git clone "https://github.com/nsonaniya2010/SubDomainizer.git" "${SCRIPT_DIR}/SubDomainizer"
     pip install -r "${SCRIPT_DIR}/SubDomainizer/requirements.txt"
     mkdir "${PATH_SUBDOMAINIZER}"
     cp "${SCRIPT_DIR}/SubDomainizer/SubDomainizer.py" "${PATH_SUBDOMAINIZER}"
     chmod +x "${PATH_SUBDOMAINIZER}/SubDomainizer.py"
     ln -s "${PATH_SUBDOMAINIZER}/SubDomainizer.py" /usr/bin/subdomainizer
-    rm -rf "${SCRIPT_DIR}/SubDomainizer"
 )}
+
+post_install() {
+    rm -rf "${SCRIPT_DIR}/SubDomainizer"
+}
 
 uninstall() {(
     set -e
@@ -41,6 +44,7 @@ main() {
         "install")
             perform_task pre_install 'preinstall subdomainizer'
             perform_task install 'installing subdomainizer'
+            perform_task post_install
             ;;
         "uninstall")
             perform_task uninstall 'uninstalling subdomainizer'

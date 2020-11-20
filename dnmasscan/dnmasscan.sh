@@ -7,16 +7,19 @@ SCRIPT_DIR="$(realpath "$(dirname "${0}")")"
 
 pre_install() {
     "${WORKING_DIR}/../masscan/masscan.sh" install ${VERBOSE}
+    git clone "https://github.com/rastating/dnmasscan.git" "${SCRIPT_DIR}/dnmasscan"
 }
 
 install() {(
     set -e
-    git clone "https://github.com/rastating/dnmasscan.git" "${SCRIPT_DIR}/dnmasscan"
     mkdir -p "${PATH_DNMASSCAN}"
     cp "${SCRIPT_DIR}/dnmasscan/dnmasscan" "${PATH_DNMASSCAN}"
     ln -s "${PATH_DNMASSCAN}/dnmasscan" /usr/bin/dnmasscan
-    rm -rf "${SCRIPT_DIR}/dnmasscan"
 )}
+
+post_install() {
+    rm -rf "${SCRIPT_DIR}/dnmasscan"
+}
 
 uninstall() {(
     set -e
@@ -39,6 +42,7 @@ main() {
         "install")
             perform_task pre_install
             perform_task install 'installing dnmasscan'
+            perform_task post_install
             ;;
         "uninstall")
             perform_task uninstall 'uninstalling dnmasscan'

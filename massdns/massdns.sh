@@ -5,18 +5,23 @@ SCRIPT_DIR="$(realpath "$(dirname "${0}")")"
 . "${SCRIPT_DIR}/../config-files/paths.sh"
 . "${SCRIPT_DIR}/../paths.sh"
 
+pre_install() {
+    git clone 'https://github.com/blechschmidt/massdns.git' "${SCRIPT_DIR}/massdns"
+}
+
 install() {(
     set -e
-    git clone 'https://github.com/blechschmidt/massdns.git' "${SCRIPT_DIR}/massdns"
     cd "${SCRIPT_DIR}/massdns"
     make
     mkdir -p "${PATH_MASSDNS}"
     cp "${SCRIPT_DIR}/massdns/bin/massdns" "${PATH_MASSDNS}"
     cp -R "${SCRIPT_DIR}/massdns/lists" "${PATH_MASSDNS}"
     ln -s "${PATH_MASSDNS}/massdns" /usr/bin/massdns
-    cd -
-    rm -rf "${SCRIPT_DIR}/massdns"
 )}
+
+post_install() {
+    rm -rf "${SCRIPT_DIR}/massdns"
+}
 
 uninstall() {(
     set -e
@@ -33,7 +38,9 @@ main() {
 
     case "${1}" in
         "install")
+            perform_task pre_install
             perform_task install 'installing massdns'
+            perform_task post_install
             ;;
         "uninstall")
             perform_task uninstall 'uninstalling massdns'

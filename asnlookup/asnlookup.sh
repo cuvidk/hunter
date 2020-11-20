@@ -7,11 +7,11 @@ SCRIPT_DIR="$(realpath "$(dirname "${0}")")"
 
 pre_install() {
     pacman -S --noconfirm --needed python-pip
+    git clone "https://github.com/yassineaboukir/Asnlookup" "${SCRIPT_DIR}/Asnlookup"
 }
 
 install() {(
     set -e
-    git clone "https://github.com/yassineaboukir/Asnlookup" "${SCRIPT_DIR}/Asnlookup"
     pip install -r "${SCRIPT_DIR}/Asnlookup/requirements.txt"
     mkdir -p "${PATH_ASNLOOKUP}"
     cp "${SCRIPT_DIR}/Asnlookup/asnlookup.py" "${PATH_ASNLOOKUP}"
@@ -19,6 +19,10 @@ install() {(
     ln -s "${PATH_ASNLOOKUP}/asnlookup.py" /usr/bin/asnlookup
     rm -rf "${SCRIPT_DIR}/Asnlookup"
 )}
+
+post_install() {
+    rm -rf "${SCRIPT_DIR}/Asnlookup"
+}
 
 uninstall() {(
     set -e
@@ -41,6 +45,7 @@ main() {
         "install")
             perform_task pre_install 'preinstall asnlookup'
             perform_task install 'installing asnlookup'
+            perform_task post_install
             ;;
         "uninstall")
             perform_task uninstall 'uninstalling asnlookup'
