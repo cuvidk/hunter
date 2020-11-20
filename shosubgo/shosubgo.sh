@@ -32,11 +32,12 @@ uninstall() {(
     rm -rf "${PATH_SHOSUBGO}"
 )}
 
-post_uninstall() {
+post_uninstall() {(
+    set -e
     "${SCRIPT_DIR}/shosubgo_config.sh" uninstall --for-user "${USER}" ${VERBOSE}
     [ -n "${SUDO_USER}" ] && "${SCRIPT_DIR}/shosubgo_config.sh" uninstall --for-user "${SUDO_USER}" ${VERBOSE}
     "${SCRIPT_DIR}/../config-files/go/go.sh" uninstall ${VERBOSE}
-}
+)}
 
 usage() {
     print_msg "Usage: ${0} <install | uninstall> [--verbose]"

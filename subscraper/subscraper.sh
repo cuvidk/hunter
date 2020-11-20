@@ -5,9 +5,6 @@ SCRIPT_DIR="$(realpath "$(dirname "${0}")")"
 . "${SCRIPT_DIR}/../config-files/paths.sh"
 . "${SCRIPT_DIR}/../paths.sh"
 
-export CENSYS_API_KEY="${CENSYS_API_KEY:-'CENSYS_API_KEY'}"
-export CENSYS_SECRET="${CENSYS_SECRET:-'CENSYS_SECRET'}"
-
 pre_install() {(
     set -e
     pacman -S --noconfirm python-pip
@@ -21,8 +18,7 @@ install() {(
     python3 setup.py install
     mkdir -p "${PATH_SUBSCRAPER}"
     mv /usr/bin/subscraper "${PATH_SUBSCRAPER}/subscraper"
-    echo '#!/bin/sh' >"${PATH_SUBSCRAPER}/subscraper.sh"
-    echo "${PATH_SUBSCRAPER}/subscraper --censys-api ${CENSYS_API_KEY} --censys-secret ${CENSYS_SECRET}" '${@}' >>"${PATH_SUBSCRAPER}/subscraper.sh"
+    cp "${SCRIPT_DIR}/config/subscraper.sh" "${PATH_SUBSCRAPER}"
     chmod +x "${PATH_SUBSCRAPER}/subscraper.sh"
     ln -s "${PATH_SUBSCRAPER}/subscraper.sh" /usr/bin/subscraper
 )}
@@ -30,6 +26,8 @@ install() {(
 post_install() {(
     set -e
     rm -rf "${SCRIPT_DIR}/subscraper"
+    "${SCRIPT_DIR}/subscraper_config.sh" install --for-user "${USER}" ${VERBOSE}
+    [ -n "${SUDO_USER}" ] && "${SCRIPT_DIR}/subscraper_config.sh" install --for-user "${SUDO_USER}" ${VERBOSE}
 )}
 
 uninstall() {(
@@ -38,9 +36,12 @@ uninstall() {(
     rm -rf "${PATH_SUBSCRAPER}"
 )}
 
-post_uninstall() {
+post_uninstall() {(
+    set -e
+    "${SCRIPT_DIR}/subscraper_config.sh" uninstall --for-user "${USER}" ${VERBOSE}
+    [ -n "${SUDO_USER}" ] && "${SCRIPT_DIR}/subscraper_config.sh" uninstall --for-user "${SUDO_USER}" ${VERBOSE}
     pacman -Rs --noconfirm python-pip
-}
+)}
 
 usage() {
     print_msg "Usage: ${0} <install | uninstall> [--verbose]"

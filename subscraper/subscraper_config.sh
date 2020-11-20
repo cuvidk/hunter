@@ -1,19 +1,28 @@
-#!/bin/sh
+!/bin/sh
 
 SCRIPT_DIR="$(realpath "$(dirname "${0}")")"
 . "${SCRIPT_DIR}/../config-files/shell-utils/util.sh"
 . "${SCRIPT_DIR}/../paths.sh"
 
-WHOXY_API_KEY=${WHOXY_API_KEY:-WHOXY_API_KEY}
+export CENSYS_API_KEY="${CENSYS_API_KEY:-CENSYS_API_KEY}"
+export CENSYS_SECRET="${CENSYS_SECRET:-CENSYS_SECRET}"
 
 install() {(
     set -e
-    mkdir -p "$(dirname ${PATH_DOMLINK_CONFIG})"
-    sed "s|WHOXY_API_KEY|${WHOXY_API_KEY}|g" "${SCRIPT_DIR}/config/domLink.cfg" >"${PATH_DOMLINK_CONFIG}"
+    mkdir -p "$(dirname ${PATH_SUBSCRAPER_CONFIG})"
+    if [ -f "${PATH_SUBSCRAPER_CONFIG}" ]; then
+        sed -i "s|PATH_SUBSCRAPER|${PATH_SUBSCRAPER}|g" "${PATH_SUBSCRAPER_CONFIG}"
+        sed -i "s|CENSYS_API_KEY|${CENSYS_API_KEY}|g" "${PATH_SUBSCRAPER_CONFIG}"
+        sed -i "s|CENSYS_SECRET|${CENSYS_SECRET}|g" "${PATH_SUBSCRAPER_CONFIG}"
+    else
+        sed "s|PATH_SUBSCRAPER|${PATH_SUBSCRAPER}|g" "${SCRIPT_DIR}/config/subscraper.sh" |
+        sed "s|CENSYS_API_KEY|${CENSYS_API_KEY}|g" |
+        sed "s|CENSYS_SECRET|${CENSYS_SECRET}|g" >"${PATH_SUBSCRAPER_CONFIG}"
+    fi
 )}
 
 uninstall() {
-    rm -rf "${PATH_DOMLINK_CONFIG}"
+    rm -rf "${PATH_SUBSCRAPER_CONFIG}"
 }
 
 usage() {
@@ -61,9 +70,9 @@ main() {
     done
     [ -z "${HOME}" -o ! -d "${HOME}" ] && usage && exit 3
 
-    PATH_DOMLINK_CONFIG=$(echo ${PATH_DOMLINK_CONFIG} | sed "s|HOME|${HOME}|")
+    PATH_SUBSCRAPER_CONFIG=$(echo ${PATH_SUBSCRAPER_CONFIG} | sed "s|HOME|${HOME}|")
 
-    perform_task ${action} "${action}ing domlink config for user ${USER}"
+    perform_task ${action} "${action}ing subscraper config for user ${USER}"
 
     check_for_errors
 }
