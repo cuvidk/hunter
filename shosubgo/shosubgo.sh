@@ -15,10 +15,15 @@ pre_install() {
 install() {(
     set -e
     git clone "https://github.com/incogbyte/shosubgo" "${PATH_SHOSUBGO}"
-    echo '#!/bin/sh' >"${PATH_SHOSUBGO}/shosubgo.sh"
-    echo "go run ${PATH_SHOSUBGO}/main.go -s ${SHODAN_API_KEY}" '${@}' >>"${PATH_SHOSUBGO}/shosubgo.sh"
+    cp "${SCRIPT_DIR}/config/shosubgo.sh" "${PATH_SHOSUBGO}"
     chmod +x "${PATH_SHOSUBGO}/shosubgo.sh"
     ln -s "${PATH_SHOSUBGO}/shosubgo.sh" /usr/bin/shosubgo
+)}
+
+post_install() {(
+    set -e
+    "${SCRIPT_DIR}/shosubgo_config.sh" install --for-user "${USER}" ${VERBOSE}
+    [ -n "${SUDO_USER}" ] && "${SCRIPT_DIR}/shosubgo_config.sh" install --for-user "${SUDO_USER}" ${VERBOSE}
 )}
 
 uninstall() {(
@@ -28,6 +33,8 @@ uninstall() {(
 )}
 
 post_uninstall() {
+    "${SCRIPT_DIR}/shosubgo_config.sh" uninstall --for-user "${USER}" ${VERBOSE}
+    [ -n "${SUDO_USER}" ] && "${SCRIPT_DIR}/shosubgo_config.sh" uninstall --for-user "${SUDO_USER}" ${VERBOSE}
     "${SCRIPT_DIR}/../config-files/go/go.sh" uninstall ${VERBOSE}
 }
 
@@ -42,6 +49,7 @@ main() {
         "install")
             perform_task pre_install
             perform_task install 'installing shosubgo'
+            perform_task post_install
             ;;
         "uninstall")
             perform_task uninstall 'uninstalling shosubgo'

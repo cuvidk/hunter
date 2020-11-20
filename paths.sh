@@ -30,3 +30,4 @@ PATH_GITHUB_SEARCH='/opt/github-search'
 
 PATH_AMASS_CONFIG="${PATH_AMASS}/config.ini"
 PATH_DOMLINK_CONFIG="${PATH_DOMLINK}/domLink.cfg"
+PATH_SHOSUBGO_CONFIG="${PATH_SHOSUBGO}/shosubgo.sh"
