@@ -8,6 +8,11 @@ install_package() {
     pacman -S --noconfirm --needed "${package_name}"
 }
 
+install_custom_package() {
+    local package_name=$1
+    "${SCRIPT_DIR}/config-files/${package_name}/${package_name}.sh" install ${VERBOSE}
+}
+
 install_packages() {
     local packages="sudo
                     man-db
@@ -16,7 +21,6 @@ install_packages() {
                     wget
                     base-devel
                     git
-                    python-pip
                     iputils
                     iproute2
                     chromium"
@@ -29,14 +33,14 @@ install_packages() {
     done
 
     for package in ${custom_packages}; do
-        "${SCRIPT_DIR}/config-files/${package}/${package}.sh" install
+        perform_task_arg install_custom_package "${package}"
     done
 }
 
 main() {
     setup_verbosity "${@}"
 
-    perform_task install_packages
+    install_packages
 
     check_for_errors
 }

@@ -21,5 +21,5 @@ WORKDIR /root
 RUN pacman -Syu --noconfirm
 COPY . /root/hunter
 RUN ./hunter/prerequisites.sh --verbose
-RUN ./hunter/tools.sh install
+RUN ./hunter/bulk_install_tools.sh --verbose
 CMD /usr/bin/zsh -l
