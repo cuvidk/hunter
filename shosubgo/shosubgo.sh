@@ -14,7 +14,6 @@ pre_install() {
 
 install() {(
     set -e
-    print_msg "${SHODAN_API_KEY}\n"
     git clone "https://github.com/incogbyte/shosubgo" "${PATH_SHOSUBGO}"
     echo '#!/bin/sh' >"${PATH_SHOSUBGO}/shosubgo.sh"
     echo "go run ${PATH_SHOSUBGO}/main.go -s ${SHODAN_API_KEY}" '${@}' >>"${PATH_SHOSUBGO}/shosubgo.sh"

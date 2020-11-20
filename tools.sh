@@ -2,50 +2,9 @@
 
 ###################### INSTALL ######################
 
-install_subscraper() {
-    git clone "https://github.com/m8r0wn/subscraper" "${WORKING_DIR}/subscraper"
-    cd "${WORKING_DIR}/subscraper"
-    python3 setup.py install
-    pip install ipparser
-    mkdir "${SUBSCRAPER_PATH}"
-    mv /usr/bin/subscraper "${SUBSCRAPER_PATH}/subscraper"
-    echo '#!/bin/sh' >"${SUBSCRAPER_PATH}/subscraper.sh"
-    echo "${SUBSCRAPER_PATH}/subscraper --censys-api ${CENSYS_API_KEY} --censys-secret ${CENSYS_SECRET}" '${@}' >>"${SUBSCRAPER_PATH}/subscraper.sh"
-    chmod +x "${SUBSCRAPER_PATH}/subscraper.sh"
-    chown -R "${g_user}:${g_user}" "${SUBSCRAPER_PATH}"
-    ln -s "${SUBSCRAPER_PATH}/subscraper.sh" /usr/bin/subscraper
-    cd -
-    rm -rf "${WORKING_DIR}/subscraper"
-}
-
 install_github_search() {
     git clone "https://github.com/gwen001/github-search.git" "${GITHUB_SEARCH_PATH}"
     chown -R "${g_user}:${g_user}" "${GITHUB_SEARCH_PATH}"
-}
-
-install_eyewitness() {
-    git clone https://github.com/cuvidk/EyeWitness.git "${EYEWITNESS_PATH}"
-    chown -R "${g_user}:${g_user}" "${EYEWITNESS_PATH}"
-    cd "${EYEWITNESS_PATH}"
-    git checkout fix-recursive-symlink-and-bad-pkg-name-arch
-    sh "${EYEWITNESS_PATH}/Python/setup/setup.sh"
-    ln -s "${EYEWITNESS_PATH}/Python/EyeWitness.py" /usr/bin/eyewitness
-    cd -
-
-    # the following issue should be fixed upstream instead; i submitted a pullrequest
-    # to their git repository
-
-    #rm -rf /usr/bin/geckodriver
-    #geckodriver_x86_64='https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckodriver-v0.26.0-linux64.tar.gz'
-    #wget ${geckodriver_x86_64}
-    #tar -xvf geckodriver-v0.26.0-linux64.tar.gz
-    #rm geckodriver-v0.26.0-linux64.tar.gz
-    #mv geckodriver /usr/bin/geckodriver
-
-    # # firefox is not installed because python3-netaddr is not a valid package (fix this upstream)
-    #for package in python-netaddr firefox; do
-    #    pacman -S --noconfirm "${package}"
-    #done
 }
 
 install_nmap() {
@@ -60,18 +19,11 @@ install_sqlmap() {
     pacman -S --noconfirm sqlmap
 }
 
-create_wordlist() {
-    mkdir -p "${WORDLISTS_PATH}"
-}
-
 fix_wordlists_owner() {
     chown -R "${g_user}:${g_user}" "${WORDLISTS_PATH}"
 }
 
 install_all() {
-    #install_eyewitness
-    create_wordlist
-    install_subscraper
     install_github_search
     install_nmap
     install_medusa
@@ -81,21 +33,8 @@ install_all() {
 
 ###################### UNINSTALL ######################
 
-remove_subscraper() {
-    rm -rf "${SUBSCRAPER_PATH}"
-    rm -rf /usr/bin/subscraper
-}
-
 remove_github_search() {
     rm -rf "${GITHUB_SEARCH_PATH}"
-}
-
-remove_eyewitness() {
-    rm -rf "${EYEWITNESS_PATH}"
-    rm -rf /usr/bin/eyewitness
-    # eyewitness has a custom installer that installs
-    # a lot of dependencies; I cannot delete those manually
-    # because a lot of them may be required by other software
 }
 
 remove_nmap() {
@@ -115,8 +54,6 @@ remove_wordlists() {
 }
 
 remove_all() {
-    #remove_eyewitness
-    remove_subscraper
     remove_github_search
     remove_nmap
     remove_medusa
@@ -133,8 +70,6 @@ WORKING_DIR="$(realpath "$(dirname "${0}")")"
 export GOPATH="${PATH_GOLANG}"
 GO_PACKAGE_PATH="${PATH_GOLANG}"
 
-EYEWITNESS_PATH='/opt/eyewitness'
-SUBSCRAPER_PATH='/opt/subscraper'
 GITHUB_SEARCH_PATH='/opt/github-search'
 
 usage() {

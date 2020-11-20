@@ -33,6 +33,8 @@ fix_owner() {
     chown -R "${USER}":"${USER}" "${PATH_GETRELATIONSHIP}"
     chown -R "${USER}":"${USER}" "${PATH_FAVFREAK}"
     chown -R "${USER}":"${USER}" "${PATH_SHOSUBGO}"
+    chown -R "${USER}":"${USER}" "${PATH_SUBSCRAPER}"
+    chown -R "${USER}":"${USER}" "${PATH_EYEWITNESS}"
 }
 
 main() {
