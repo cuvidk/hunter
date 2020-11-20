@@ -26,6 +26,7 @@ PATH_FAVFREAK='/opt/favfreak'
 PATH_SHOSUBGO='/opt/shosubgo'
 PATH_SUBSCRAPER='/opt/subscraper'
 PATH_EYEWITNESS='/opt/eyewitness'
+PATH_GITHUB_SEARCH='/opt/github-search'
 
 PATH_AMASS_CONFIG="${PATH_AMASS}/config.ini"
 PATH_DOMLINK_CONFIG="${PATH_DOMLINK}/domLink.cfg"
