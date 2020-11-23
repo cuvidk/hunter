@@ -17,6 +17,7 @@ install() {(
     mkdir -p "${PATH_GOSPIDER}"
     ln -s "${GOPATH}/bin/gospider" "${PATH_GOSPIDER}/gospider"
     ln -s "${PATH_GOSPIDER}/gospider" /usr/bin/gospider
+    exit 0
 )}
 
 uninstall() {(
@@ -24,6 +25,7 @@ uninstall() {(
     rm -rf /usr/bin/gospider
     rm -rf "${PATH_GOSPIDER}"
     rm -rf "${GOPATH}/bin/gospider"
+    exit 0
 )}
 
 post_uninstall() {

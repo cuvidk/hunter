@@ -18,18 +18,21 @@ install() {(
     cp "${SCRIPT_DIR}/config/shosubgo.sh" "${PATH_SHOSUBGO}"
     chmod +x "${PATH_SHOSUBGO}/shosubgo.sh"
     ln -s "${PATH_SHOSUBGO}/shosubgo.sh" /usr/bin/shosubgo
+    exit 0
 )}
 
 post_install() {(
     set -e
     "${SCRIPT_DIR}/shosubgo_config.sh" install --for-user "${USER}" ${VERBOSE}
     [ -n "${SUDO_USER}" ] && "${SCRIPT_DIR}/shosubgo_config.sh" install --for-user "${SUDO_USER}" ${VERBOSE}
+    exit 0
 )}
 
 uninstall() {(
     set -e
     rm -rf /usr/bin/shosubgo
     rm -rf "${PATH_SHOSUBGO}"
+    exit 0
 )}
 
 post_uninstall() {(
@@ -37,6 +40,7 @@ post_uninstall() {(
     "${SCRIPT_DIR}/shosubgo_config.sh" uninstall --for-user "${USER}" ${VERBOSE}
     [ -n "${SUDO_USER}" ] && "${SCRIPT_DIR}/shosubgo_config.sh" uninstall --for-user "${SUDO_USER}" ${VERBOSE}
     "${SCRIPT_DIR}/../config-files/go/go.sh" uninstall ${VERBOSE}
+    exit 0
 )}
 
 usage() {

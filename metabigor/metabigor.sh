@@ -17,6 +17,7 @@ install() {(
     mkdir -p "${PATH_METABIGOR}"
     ln -s "${GOPATH}/bin/metabigor" "${PATH_METABIGOR}/metabigor"
     ln -s "${PATH_METABIGOR}/metabigor" /usr/bin/metabigor
+    exit 0
 )}
 
 uninstall() {(
@@ -24,6 +25,7 @@ uninstall() {(
     rm -rf /usr/bin/metabigor
     rm -rf "${PATH_METABIGOR}"
     rm -rf "${GOPATH}/bin/metabigor"
+    exit 0
 )}
 
 post_uninstall() {

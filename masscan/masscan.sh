@@ -16,6 +16,7 @@ install() {(
     mkdir -p "${PATH_MASSCAN}"
     cp "${SCRIPT_DIR}/masscan/bin/masscan" "${PATH_MASSCAN}"
     ln -s "${PATH_MASSCAN}/masscan" /usr/bin/masscan
+    exit 0
 )}
 
 post_install() {
@@ -26,6 +27,7 @@ uninstall() {(
     set -e
     rm -rf /usr/bin/masscan
     rm -rf "${PATH_MASSCAN}"
+    exit 0
 )}
 
 usage() {

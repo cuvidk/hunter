@@ -11,6 +11,7 @@ install() {(
     set -e
     mkdir -p "$(dirname ${PATH_DOMLINK_CONFIG})"
     sed "s|WHOXY_API_KEY|${WHOXY_API_KEY}|g" "${SCRIPT_DIR}/config/domLink.cfg" >"${PATH_DOMLINK_CONFIG}"
+    exit 0
 )}
 
 uninstall() {

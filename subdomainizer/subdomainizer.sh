@@ -17,6 +17,7 @@ install() {(
     cp "${SCRIPT_DIR}/SubDomainizer/SubDomainizer.py" "${PATH_SUBDOMAINIZER}"
     chmod +x "${PATH_SUBDOMAINIZER}/SubDomainizer.py"
     ln -s "${PATH_SUBDOMAINIZER}/SubDomainizer.py" /usr/bin/subdomainizer
+    exit 0
 )}
 
 post_install() {
@@ -27,6 +28,7 @@ uninstall() {(
     set -e
     rm -rf /usr/bin/subdomainizer
     rm -rf "${PATH_SUBDOMAINIZER}"
+    exit 0
 )}
 
 post_uninstall() {

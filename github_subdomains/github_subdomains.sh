@@ -17,6 +17,7 @@ install() {(
     mkdir -p "${PATH_GITHUB_SUBDOMAINS}"
     ln -s "${GOPATH}/bin/github-subdomains" "${PATH_GITHUB_SUBDOMAINS}/github-subdomains"
     ln -s "${PATH_GITHUB_SUBDOMAINS}/github-subdomains" /usr/bin/github-subdomains
+    exit 0
 )}
 
 uninstall() {(
@@ -24,6 +25,7 @@ uninstall() {(
     rm -rf /usr/bin/github-subdomains
     rm -rf "${PATH_GITHUB_SUBDOMAINS}"
     rm -rf "${GOPATH}/bin/github-subdomains"
+    exit 0
 )}
 
 post_uninstall() {

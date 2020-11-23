@@ -17,6 +17,7 @@ install() {(
     cp "${SCRIPT_DIR}/massdns/bin/massdns" "${PATH_MASSDNS}"
     cp -R "${SCRIPT_DIR}/massdns/lists" "${PATH_MASSDNS}"
     ln -s "${PATH_MASSDNS}/massdns" /usr/bin/massdns
+    exit 0
 )}
 
 post_install() {
@@ -27,6 +28,7 @@ uninstall() {(
     set -e
     rm -rf /usr/bin/massdns
     rm -rf "${PATH_MASSDNS}"
+    exit 0
 )}
 
 usage() {

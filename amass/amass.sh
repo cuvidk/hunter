@@ -27,12 +27,14 @@ install() {(
     mkdir -p "${PATH_AMASS_WORDLISTS}"
     cp -r "${SCRIPT_DIR}/Amass/examples/wordlists/" "${PATH_AMASS_WORDLISTS}"
     rm -rf "${SCRIPT_DIR}/Amass"
+    exit 0
 )}
 
 post_install() {(
     set -e
     "${SCRIPT_DIR}/amass_config.sh" install --for-user "${USER}" ${VERBOSE}
     [ -n "${SUDO_USER}" ] && "${SCRIPT_DIR}/amass_config.sh" install --for-user "${SUDO_USER}" ${VERBOSE}
+    exit 0
 )}
 
 uninstall() {(
@@ -41,6 +43,7 @@ uninstall() {(
     rm -rf "${PATH_AMASS}"
     rm -rf "${PATH_AMASS_WORDLISTS}"
     rm -rf "${GOPATH}/bin/amass"
+    exit 0
 )}
 
 post_uninstall() {(
@@ -48,6 +51,7 @@ post_uninstall() {(
     "${SCRIPT_DIR}/amass_config.sh" uninstall --for-user "${USER}" ${VERBOSE}
     [ -n "${SUDO_USER}" ] && "${SCRIPT_DIR}/amass_config.sh" uninstall --for-user "${SUDO_USER}" ${VERBOSE}
     "${SCRIPT_DIR}/../config-files/go/go.sh" uninstall ${VERBOSE}
+    exit 0
 )}
 
 usage() {

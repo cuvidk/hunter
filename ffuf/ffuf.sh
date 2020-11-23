@@ -17,6 +17,7 @@ install() {(
     mkdir -p "${PATH_FFUF}"
     ln -s "${GOPATH}/bin/ffuf" "${PATH_FFUF}/ffuf"
     ln -s "${PATH_FFUF}/ffuf" /usr/bin/ffuf
+    exit 0
 )}
 
 uninstall() {(
@@ -24,6 +25,7 @@ uninstall() {(
     rm -rf /usr/bin/ffuf
     rm -rf "${PATH_FFUF}"
     rm -rf "${GOPATH}/bin/ffuf"
+    exit 0
 )}
 
 post_uninstall() {

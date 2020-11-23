@@ -10,6 +10,7 @@ pre_install() {(
     pacman -S --noconfirm --needed medusa
     pacman -S --noconfirm --needed python-pip
     git clone "https://github.com/x90skysn3k/brutespray.git" "${SCRIPT_DIR}/brutespray"
+    exit 0
 )}
 
 install() {(
@@ -19,6 +20,7 @@ install() {(
     cp "${SCRIPT_DIR}/brutespray/brutespray.py" "${PATH_BRUTESPRAY}"
     ln -s "${PATH_BRUTESPRAY}/brutespray.py" /usr/bin/brutespray
     cp -r "${SCRIPT_DIR}/brutespray/wordlist/" "${PATH_BRUTESPRAY_WORDLISTS}"
+    exit 0
 )}
 
 post_install() {
@@ -30,12 +32,14 @@ uninstall() {(
     rm -rf /usr/bin/brutespray
     rm -rf "${PATH_BRUTESPRAY}"
     rm -rf "${PATH_BRUTESPRAY_WORDLISTS}"
+    exit 0
 )}
 
 post_uninstall() {(
     set -e
     pacman -Rs --noconfirm medusa
     pacman -Rs --noconfirm python-pip
+    exit 0
 )}
 
 usage() {

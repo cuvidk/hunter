@@ -17,12 +17,14 @@ install() {(
     ln -s "${PATH_SUBFINDER}/subfinder" /usr/bin/subfinder
     cd -
     rm -rf "${SCRIPT_DIR}/subfinder"
+    exit 0
 )}
 
 uninstall() {(
     set -e
     rm -rf /usr/bin/subfinder
     rm -rf "${PATH_SUBFINDER}"
+    exit 0
 )}
 
 usage() {

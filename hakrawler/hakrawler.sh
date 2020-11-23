@@ -17,6 +17,7 @@ install() {(
     mkdir -p "${PATH_HAKRAWLER}"
     ln -s "${GOPATH}/bin/hakrawler" "${PATH_HAKRAWLER}/hakrawler"
     ln -s "${PATH_HAKRAWLER}/hakrawler" /usr/bin/hakrawler
+    exit 0
 )}
 
 uninstall() {(
@@ -24,6 +25,7 @@ uninstall() {(
     rm -rf /usr/bin/hakrawler
     rm -rf "${PATH_HAKRAWLER}"
     rm -rf "${GOPATH}/bin/hakrawler"
+    exit 0
 )}
 
 post_uninstall() {

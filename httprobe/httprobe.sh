@@ -20,6 +20,7 @@ install() {(
 
     ln -s "${GOPATH}/bin/httprobe" "${PATH_HTTPROBE}/httprobe"
     ln -s "${PATH_HTTPROBE}/httprobe" /usr/bin/httprobe
+    exit 0
 )}
 
 uninstall() {(
@@ -27,6 +28,7 @@ uninstall() {(
     rm -rf /usr/bin/httprobe
     rm -rf "${PATH_HTTPROBE}"
     rm -rf "${GOPATH}/bin/httprobe"
+    exit 0
 )}
 
 post_uninstall() {

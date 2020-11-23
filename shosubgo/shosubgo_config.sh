@@ -17,6 +17,7 @@ install() {(
         sed "s|PATH_SHOSUBGO|${PATH_SHOSUBGO}|g" "${SCRIPT_DIR}/config/shosubgo.sh" |
         sed "s|SHODAN_API_KEY|${SHODAN_API_KEY}|g" >"${PATH_SHOSUBGO_CONFIG}"
     fi
+    exit 0
 )}
 
 uninstall() {

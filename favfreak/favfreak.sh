@@ -17,6 +17,7 @@ install() {(
     cp "${SCRIPT_DIR}/FavFreak/favfreak.py" "${PATH_FAVFREAK}"
     chmod +x "${PATH_FAVFREAK}/favfreak.py"
     ln -s "${PATH_FAVFREAK}/favfreak.py" /usr/bin/favfreak
+    exit 0
 )}
 
 post_install() {
@@ -27,6 +28,7 @@ uninstall() {(
     set -e
     rm -rf /usr/bin/favfreak
     rm -rf "${PATH_FAVFREAK}"
+    exit 0
 )}
 
 post_uninstall() {

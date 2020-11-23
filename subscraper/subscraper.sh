@@ -10,6 +10,7 @@ pre_install() {(
     pacman -S --noconfirm python-pip
     pip install ipparser
     git clone "https://github.com/m8r0wn/subscraper" "${SCRIPT_DIR}/subscraper"
+    exit 0
 )}
 
 install() {(
@@ -21,6 +22,7 @@ install() {(
     cp "${SCRIPT_DIR}/config/subscraper.sh" "${PATH_SUBSCRAPER}"
     chmod +x "${PATH_SUBSCRAPER}/subscraper.sh"
     ln -s "${PATH_SUBSCRAPER}/subscraper.sh" /usr/bin/subscraper
+    exit 0
 )}
 
 post_install() {(
@@ -28,12 +30,14 @@ post_install() {(
     rm -rf "${SCRIPT_DIR}/subscraper"
     "${SCRIPT_DIR}/subscraper_config.sh" install --for-user "${USER}" ${VERBOSE}
     [ -n "${SUDO_USER}" ] && "${SCRIPT_DIR}/subscraper_config.sh" install --for-user "${SUDO_USER}" ${VERBOSE}
+    exit 0
 )}
 
 uninstall() {(
     set -e
     rm -rf /usr/bin/subscraper
     rm -rf "${PATH_SUBSCRAPER}"
+    exit 0
 )}
 
 post_uninstall() {(
@@ -41,6 +45,7 @@ post_uninstall() {(
     "${SCRIPT_DIR}/subscraper_config.sh" uninstall --for-user "${USER}" ${VERBOSE}
     [ -n "${SUDO_USER}" ] && "${SCRIPT_DIR}/subscraper_config.sh" uninstall --for-user "${SUDO_USER}" ${VERBOSE}
     pacman -Rs --noconfirm python-pip
+    exit 0
 )}
 
 usage() {

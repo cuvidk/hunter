@@ -17,6 +17,7 @@ install() {(
     cp "${SCRIPT_DIR}/DomLink/domLink.py" "${PATH_DOMLINK}"
     chmod +x "${PATH_DOMLINK}/domLink.py"
     ln -s "${PATH_DOMLINK}/domLink.py" /usr/bin/domlink
+    exit 0
 )}
 
 post_install() {(
@@ -24,12 +25,14 @@ post_install() {(
     rm -rf "${SCRIPT_DIR}/DomLink"
     "${SCRIPT_DIR}/domlink_config.sh" install --for-user "${USER}" ${VERBOSE}
     [ -n "${SUDO_USER}" ] && "${SCRIPT_DIR}/domlink_config.sh" install --for-user "${SUDO_USER}" ${VERBOSE}
+    exit 0
 )}
 
 uninstall() {(
     set -e
     rm -rf /usr/bin/domlink
     rm -rf "${PATH_DOMLINK}"
+    exit 0
 )}
 
 post_uninstall() {

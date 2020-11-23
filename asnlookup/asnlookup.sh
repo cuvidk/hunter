@@ -18,6 +18,7 @@ install() {(
     chmod +x "${PATH_ASNLOOKUP}/asnlookup.py"
     ln -s "${PATH_ASNLOOKUP}/asnlookup.py" /usr/bin/asnlookup
     rm -rf "${SCRIPT_DIR}/Asnlookup"
+    exit 0
 )}
 
 post_install() {
@@ -28,6 +29,7 @@ uninstall() {(
     set -e
     rm -rf /usr/bin/asnlookup
     rm -rf "${PATH_ASNLOOKUP}"
+    exit 0
 )}
 
 post_uninstall() {

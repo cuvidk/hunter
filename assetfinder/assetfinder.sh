@@ -20,6 +20,7 @@ install() {(
 
     ln -s "${GOPATH}/bin/assetfinder" "${PATH_ASSETFINDER}/assetfinder"
     ln -s "${PATH_ASSETFINDER}/assetfinder" /usr/bin/assetfinder
+    exit 0
 )}
 
 uninstall() {(
@@ -27,6 +28,7 @@ uninstall() {(
     rm -rf /usr/bin/assetfinder
     rm -rf "${PATH_ASSETFINDER}"
     rm -rf "${GOPATH}/bin/assetfinder"
+    exit 0
 )}
 
 post_uninstall() {

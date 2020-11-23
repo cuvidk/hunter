@@ -20,6 +20,7 @@ install() {(
         sed "s|CENSYS_API_KEY|${CENSYS_API_KEY}|g" |
         sed "s|CENSYS_SECRET|${CENSYS_SECRET}|g" >"${PATH_SUBSCRAPER_CONFIG}"
     fi
+    exit 0
 )}
 
 uninstall() {

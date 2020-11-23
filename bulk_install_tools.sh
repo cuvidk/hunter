@@ -60,5 +60,5 @@ main() {
     check_for_errors
 }
 
-main()
+main "${@}"
 

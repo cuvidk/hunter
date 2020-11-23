@@ -15,6 +15,7 @@ install() {(
     mkdir -p "${PATH_DNMASSCAN}"
     cp "${SCRIPT_DIR}/dnmasscan/dnmasscan" "${PATH_DNMASSCAN}"
     ln -s "${PATH_DNMASSCAN}/dnmasscan" /usr/bin/dnmasscan
+    exit 0
 )}
 
 post_install() {
@@ -25,6 +26,7 @@ uninstall() {(
     set -e
     rm -rf /usr/bin/dnmasscan
     rm -rf "${PATH_DNMASSCAN}"
+    exit 0
 )}
 
 post_uninstall() {

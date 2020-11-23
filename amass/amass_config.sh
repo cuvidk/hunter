@@ -44,6 +44,7 @@ install() {(
     sed "s|ZOOMEYE_USERNAME|${ZOOMEYE_USERNAME}|g" |
     sed "s|ZOOMEYE_PASSWORD|${ZOOMEYE_PASSWORD}|g" |
     sed "s|PATH_AMASS_WORDLISTS|${PATH_AMASS_WORDLISTS}|g" >"${PATH_AMASS_CONFIG}"
+    exit 0
 )}
 
 uninstall() {
