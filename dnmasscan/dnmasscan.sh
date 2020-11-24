@@ -1,25 +1,18 @@
-#!/bin/sh
-
-SCRIPT_DIR="$(realpath "$(dirname "${0}")")"
-. "${SCRIPT_DIR}/../config-files/shell-utils/util.sh"
-. "${SCRIPT_DIR}/../config-files/paths.sh"
-. "${SCRIPT_DIR}/../paths.sh"
-
 pre_install() {
-    "${WORKING_DIR}/../masscan/masscan.sh" install ${VERBOSE}
-    git clone "https://github.com/rastating/dnmasscan.git" "${SCRIPT_DIR}/dnmasscan"
+    "${MAKE_SCRIPT_DIR}/make.sh" install masscan ${VERBOSE}
+    git clone "https://github.com/rastating/dnmasscan.git" "${MAKE_SCRIPT_DIR}/Dnmasscan"
 }
 
 install() {(
     set -e
     mkdir -p "${PATH_DNMASSCAN}"
-    cp "${SCRIPT_DIR}/dnmasscan/dnmasscan" "${PATH_DNMASSCAN}"
+    cp "${MAKE_SCRIPT_DIR}/Dnmasscan/dnmasscan" "${PATH_DNMASSCAN}"
     ln -s "${PATH_DNMASSCAN}/dnmasscan" /usr/bin/dnmasscan
     exit 0
 )}
 
 post_install() {
-    rm -rf "${SCRIPT_DIR}/dnmasscan"
+    rm -rf "${MAKE_SCRIPT_DIR}/Dnmasscan"
 }
 
 uninstall() {(
@@ -30,33 +23,5 @@ uninstall() {(
 )}
 
 post_uninstall() {
-    "${WORKING_DIR}/../masscan/masscan.sh" uninstall ${VERBOSE}
+    "${MAKE_SCRIPT_DIR}/make.sh" uninstall masscan ${VERBOSE}
 }
-
-usage() {
-    print_msg "Usage: ${0} <install | uninstall> [--verbose]"
-}
-
-main() { 
-    setup_verbosity "${@}"
-
-    case "${1}" in
-        "install")
-            perform_task pre_install
-            perform_task install 'installing dnmasscan'
-            perform_task post_install
-            ;;
-        "uninstall")
-            perform_task uninstall 'uninstalling dnmasscan'
-            perform_task post_uninstall
-            ;;
-        *)
-            usage
-            exit 1
-            ;;
-    esac
-
-    check_for_errors
-}
-
-main "${@}"
