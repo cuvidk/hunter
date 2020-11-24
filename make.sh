@@ -6,7 +6,7 @@ MAKE_SCRIPT_DIR="$(realpath "$(dirname "${0}")")"
 . "${MAKE_SCRIPT_DIR}/paths.sh"
 
 usage() {
-    print_msg "Usage: ${0} <install|uninstall> <pkg> [--verbose]"
+    print_msg "Usage: ${0} <install|uninstall> <pkg> [--verbose]\n"
 }
 
 exit_with_msg() {
@@ -22,9 +22,9 @@ main() {
     local pkg="${2}"
 
     [ -z "${pkg}" ] && exit_with_msg "Missing pkg param" 1
-    [ ! -f "${pkg}/${pkg}.sh" ] && exit_with_msg "Unknown pkg ${pkg}" 2
+    [ ! -f "${MAKE_SCRIPT_DIR}/${pkg}/${pkg}.sh" ] && exit_with_msg "Unknown pkg ${pkg}" 2
 
-    . "${pkg}/${pkg}.sh"
+    . "${MAKE_SCRIPT_DIR}/${pkg}/${pkg}.sh"
 
     [ -z "$(type install | grep "function")" ] && exit_with_msg "Missing install func" 3
     [ -z "$(type uninstall | grep "function")" ] && exit_with_msg "Missing uninstall func" 4
