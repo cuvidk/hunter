@@ -16,8 +16,8 @@ install() {(
 post_install() {(
     set -e
     rm -rf "${MAKE_SCRIPT_DIR}/DomLink"
-    "${MAKE_SCRIPT_DIR}/domlink/domlink_config.sh" install --for-user "${USER}" ${VERBOSE}
-    [ -n "${SUDO_USER}" ] && "${MAKE_SCRIPT_DIR}/domlink/domlink_config.sh" install --for-user "${SUDO_USER}" ${VERBOSE}
+    "${MAKE_SCRIPT_DIR}/make_config.sh" install domlink "${USER}" ${VERBOSE}
+    [ -n "${SUDO_USER}" ] && "${MAKE_SCRIPT_DIR}/make_config.sh" install domlink "${SUDO_USER}" ${VERBOSE}
     exit 0
 )}
 
@@ -29,7 +29,7 @@ uninstall() {(
 )}
 
 post_uninstall() {
-    "${MAKE_SCRIPT_DIR}/domlink/domlink_config.sh" uninstall --for-user "${USER}" ${VERBOSE}
-    [ -n "${SUDO_USER}" ] && "${MAKE_SCRIPT_DIR}/domlink/domlink_config.sh" uninstall --for-user "${SUDO_USER}" ${VERBOSE}
+    "${MAKE_SCRIPT_DIR}/make_config.sh" uninstall domlink "${USER}" ${VERBOSE}
+    [ -n "${SUDO_USER}" ] && "${MAKE_SCRIPT_DIR}/make_config.sh" uninstall domlink "${SUDO_USER}" ${VERBOSE}
     pacman -Rs --noconfirm python-pip
 }

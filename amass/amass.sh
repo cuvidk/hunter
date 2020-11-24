@@ -25,8 +25,8 @@ install() {(
 
 post_install() {(
     set -e
-    "${MAKE_SCRIPT_DIR}/amass/amass_config.sh" install --for-user "${USER}" ${VERBOSE}
-    [ -n "${SUDO_USER}" ] && "${MAKE_SCRIPT_DIR}/amass/amass_config.sh" install --for-user "${SUDO_USER}" ${VERBOSE}
+    "${MAKE_SCRIPT_DIR}/make_config.sh" install amass "${USER}" ${VERBOSE}
+    [ -n "${SUDO_USER}" ] && "${MAKE_SCRIPT_DIR}/make_config.sh" install amass "${SUDO_USER}" ${VERBOSE}
     exit 0
 )}
 
@@ -41,8 +41,8 @@ uninstall() {(
 
 post_uninstall() {(
     set -e
-    "${MAKE_SCRIPT_DIR}/amass/amass_config.sh" uninstall --for-user "${USER}" ${VERBOSE}
-    [ -n "${SUDO_USER}" ] && "${MAKE_SCRIPT_DIR}/amass/amass_config.sh" uninstall --for-user "${SUDO_USER}" ${VERBOSE}
+    "${MAKE_SCRIPT_DIR}/make_config.sh" uninstall amass "${USER}" ${VERBOSE}
+    [ -n "${SUDO_USER}" ] && "${MAKE_SCRIPT_DIR}/make_config.sh" uninstall amass "${SUDO_USER}" ${VERBOSE}
     "${MAKE_SCRIPT_DIR}/config-files/go/go.sh" uninstall ${VERBOSE}
     exit 0
 )}

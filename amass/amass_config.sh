@@ -1,10 +1,3 @@
-#!/bin/sh
-
-SCRIPT_DIR="$(realpath "$(dirname "${0}")")"
-. "${SCRIPT_DIR}/../config-files/shell-utils/util.sh"
-. "${SCRIPT_DIR}/../paths.sh"
-. "${SCRIPT_DIR}/../common/config_common.sh"
-
 ALIENVAULT_API_KEY=${ALIENVAULT_API_KEY:-ALIENVAULT_API_KEY}
 BINARYEDGE_API_KEY=${BINARYEDGE_API_KEY:-BINARYEDGE_API_KEY}
 CENSYS_API_KEY=${CENSYS_API_KEY:-CENSYS_API_KEY}
@@ -26,7 +19,7 @@ ZOOMEYE_PASSWORD=${ZOOMEYE_PASSWORD:-ZOOMEYE_PASSWORD}
 install() {(
     set -e
     mkdir -p "$(dirname ${PATH_AMASS_CONFIG})"
-    sed "s|ALIENVAULT_API_KEY|${ALIENVAULT_API_KEY}|g" "${SCRIPT_DIR}/config/config.ini" |
+    sed "s|ALIENVAULT_API_KEY|${ALIENVAULT_API_KEY}|g" "${MAKE_CONFIG_SCRIPT_DIR}/amass/config/config.ini" |
     sed "s|BINARYEDGE_API_KEY|${BINARYEDGE_API_KEY}|g" |
     sed "s|CENSYS_API_KEY|${CENSYS_API_KEY}|g" |
     sed "s|CENSYS_SECRET|${CENSYS_SECRET}|g" |
@@ -50,20 +43,3 @@ install() {(
 uninstall() {
     rm -rf "${PATH_AMASS_CONFIG}"
 }
-
-usage() {
-    print_msg "Usage: ${0} <install|uninstall> --for-user <username> [--verbose]"
-}
-
-main() { 
-    setup_verbosity "${@}"
-    parse_cmd "${@}"
-
-    PATH_AMASS_CONFIG=$(echo ${PATH_AMASS_CONFIG} | sed "s|HOME|${HOME}|")
-
-    perform_task ${action} "${action}ing amass config for user ${USER}"
-
-    check_for_errors
-}
-
-main "${@}"

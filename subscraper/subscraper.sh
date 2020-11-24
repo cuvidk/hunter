@@ -21,8 +21,8 @@ install() {(
 post_install() {(
     set -e
     rm -rf "${MAKE_SCRIPT_DIR}/Subscraper"
-    "${MAKE_SCRIPT_DIR}/subscraper/subscraper_config.sh" install --for-user "${USER}" ${VERBOSE}
-    [ -n "${SUDO_USER}" ] && "${MAKE_SCRIPT_DIR}/subscraper/subscraper_config.sh" install --for-user "${SUDO_USER}" ${VERBOSE}
+    "${MAKE_SCRIPT_DIR}/make_config.sh" install subscraper "${USER}" ${VERBOSE}
+    [ -n "${SUDO_USER}" ] && "${MAKE_SCRIPT_DIR}/make_config.sh" install subscraper "${SUDO_USER}" ${VERBOSE}
     exit 0
 )}
 
@@ -35,8 +35,8 @@ uninstall() {(
 
 post_uninstall() {(
     set -e
-    "${MAKE_SCRIPT_DIR}/subscraper/subscraper_config.sh" uninstall --for-user "${USER}" ${VERBOSE}
-    [ -n "${SUDO_USER}" ] && "${MAKE_SCRIPT_DIR}/subscraper/subscraper_config.sh" uninstall --for-user "${SUDO_USER}" ${VERBOSE}
+    "${MAKE_SCRIPT_DIR}/make_config.sh" uninstall subscraper "${USER}" ${VERBOSE}
+    [ -n "${SUDO_USER}" ] && "${MAKE_SCRIPT_DIR}/make_config.sh" uninstall subscraper "${SUDO_USER}" ${VERBOSE}
     pacman -Rs --noconfirm python-pip
     exit 0
 )}
