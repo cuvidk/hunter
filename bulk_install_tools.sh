@@ -32,7 +32,6 @@ install_packages() {
                            github_subdomains
                            gospider
                            hakrawler
-                           hooks
                            httprobe
                            masscan
                            massdns
