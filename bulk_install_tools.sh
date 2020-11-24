@@ -48,7 +48,7 @@ install_packages() {
     done
 
     for package in ${custom_packages}; do
-        perform_task_arg install_package "${package}"
+        perform_task_arg install_custom_package "${package}"
     done
 }
 
