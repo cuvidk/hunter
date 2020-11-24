@@ -1,4 +1,4 @@
-!/bin/sh
+#!/bin/sh
 
 SCRIPT_DIR="$(realpath "$(dirname "${0}")")"
 . "${SCRIPT_DIR}/../config-files/shell-utils/util.sh"
