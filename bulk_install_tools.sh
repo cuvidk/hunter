@@ -33,7 +33,6 @@ install_packages() {
                            gospider
                            hakrawler
                            httprobe
-                           masscan
                            massdns
                            metabigor
                            shosubgo
