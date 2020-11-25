@@ -10,7 +10,7 @@ install_package() {
 
 install_custom_package() {
     local package_name=$1
-    "${SCRIPT_DIR}/config-files/${package_name}/${package_name}.sh" install ${VERBOSE}
+    "${SCRIPT_DIR}/config-files/make.sh" install "${package_name}" ${VERBOSE}
 }
 
 install_packages() {
