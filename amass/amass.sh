@@ -1,7 +1,7 @@
 export GOPATH="${GOPATH:-${PATH_GOLANG}}"
 
 pre_install() {
-    "${MAKE_SCRIPT_DIR}/config-files/go/go.sh" install ${VERBOSE}
+    "${MAKE_SCRIPT_DIR}/config-files/make.sh" install go ${VERBOSE}
 }
 
 install() {(
@@ -43,6 +43,6 @@ post_uninstall() {(
     set -e
     "${MAKE_SCRIPT_DIR}/make_config.sh" uninstall amass "${USER}" ${VERBOSE}
     [ -n "${SUDO_USER}" ] && "${MAKE_SCRIPT_DIR}/make_config.sh" uninstall amass "${SUDO_USER}" ${VERBOSE}
-    "${MAKE_SCRIPT_DIR}/config-files/go/go.sh" uninstall ${VERBOSE}
+    "${MAKE_SCRIPT_DIR}/config-files/make.sh" uninstall go ${VERBOSE}
     exit 0
 )}
