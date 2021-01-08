@@ -7,9 +7,18 @@ install() {(
     tar -xzvf "subfinder_${version}_linux_amd64.tar.gz"
     mkdir -p "${PATH_SUBFINDER}"
     mv subfinder "${PATH_SUBFINDER}"
-    ln -s "${PATH_SUBFINDER}/subfinder" /usr/bin/subfinder
+    echo '#!/bin/sh' >"${PATH_SUBFINDER}/subfinder.sh"
+    echo "${PATH_SUBFINDER}/subfinder" '${@}' -config "${PATH_SUBFINDER_CONFIG}" >>"${PATH_SUBFINDER}/subfinder.sh"
+    ln -s "${PATH_SUBFINDER}/subfinder.sh" /usr/bin/subfinder
     cd -
     rm -rf "${MAKE_SCRIPT_DIR}/Subfinder"
+    exit 0
+)}
+
+post_install() {(
+    set -e
+    "${MAKE_SCRIPT_DIR}/make_config.sh" install subfinder "${USER}" ${VERBOSE}
+    [ -n "${SUDO_USER}" ] && "${MAKE_SCRIPT_DIR}/make_config.sh" install subfinder "${SUDO_USER}" ${VERBOSE}
     exit 0
 )}
 
@@ -17,5 +26,12 @@ uninstall() {(
     set -e
     rm -rf /usr/bin/subfinder
     rm -rf "${PATH_SUBFINDER}"
+    exit 0
+)}
+
+post_uninstall() {(
+    set -e
+    "${MAKE_SCRIPT_DIR}/make_config.sh" uninstall subfinder "${USER}" ${VERBOSE}
+    [ -n "${SUDO_USER}" ] && "${MAKE_SCRIPT_DIR}/make_config.sh" uninstall subfinder "${SUDO_USER}" ${VERBOSE}
     exit 0
 )}

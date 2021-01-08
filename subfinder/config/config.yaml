@@ -1,0 +1,116 @@
+resolvers:
+    - 1.1.1.1
+    - 1.0.0.1
+    - 8.8.8.8
+    - 8.8.4.4
+    - 9.9.9.9
+    - 9.9.9.10
+    - 77.88.8.8
+    - 77.88.8.1
+    - 208.67.222.222
+    - 208.67.220.220
+sources:
+    - alienvault
+    - anubis
+    - bufferover
+    - cebaidu
+    - certspotter
+    - certspotterold
+    - censys
+    - chaos
+    - crtsh
+    - dnsdumpster
+    - hackertarget
+    - intelx
+    - ipv4info
+    - passivetotal
+    - robtex
+    - riddler
+    - securitytrails
+    - shodan
+    - spyse
+    - sublist3r
+    - threatcrowd
+    - threatminer
+    - virustotal
+all-sources:
+    - alienvault
+    - anubis
+    - archiveis
+    - binaryedge
+    - bufferover
+    - cebaidu
+    - censys
+    - certspotter
+    - certspotterold
+    - chaos
+    - commoncrawl
+    - crtsh
+    - dnsdumpster
+    - dnsdb
+    - github
+    - hackertarget
+    - ipv4info
+    - intelx
+    - passivetotal
+    - rapiddns
+    - riddler
+    - recon
+    - robtex
+    - securitytrails
+    - shodan
+    - sitedossier
+    - spyse
+    - sublist3r
+    - threatbook
+    - threatcrowd
+    - threatminer
+    - virustotal
+    - waybackarchive
+    - ximcx
+    - zoomeye
+recursive:
+    - alienvault
+    - binaryedge
+    - bufferover
+    - cebaidu
+    - certspotter
+    - certspotterold
+    - crtsh
+    - dnsdumpster
+    - hackertarget
+    - ipv4info
+    - passivetotal
+    - securitytrails
+    - sublist3r
+    - virustotal
+    - ximcx
+binaryedge:
+  - BINARYEDGE_API_KEY
+censys:
+  - CENSYS_API_KEY:CENSYS_SECRET
+certspotter: []
+chaos: []
+dnsdb: []
+github:
+  - GITHUB_API_KEY
+intelx:
+  - INTELX_HOST:INTELX_API_KEY
+passivetotal:
+  - PASSIVETOTAL_USERNAME:PASSIVETOTAL_PASSWORD
+recon: []
+robtex: []
+securitytrails:
+  - SECURITYTRAILS_API_KEY
+shodan:
+  - SHODAN_API_KEY
+spyse:
+  - SPYSE_API_KEY
+threatbook: []
+urlscan:
+  - URLSCAN_API_KEY
+virustotal:
+  - VIRUSTOTAL_API_KEY
+zoomeye:
+  - ZOOMEYE_USERNAME:ZOOMEYE_PASSWORD
+subfinder-version: 2.4.5
