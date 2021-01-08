@@ -9,6 +9,7 @@ install() {(
     mv subfinder "${PATH_SUBFINDER}"
     echo '#!/bin/sh' >"${PATH_SUBFINDER}/subfinder.sh"
     echo "${PATH_SUBFINDER}/subfinder" '${@}' -config "${PATH_SUBFINDER_CONFIG}" >>"${PATH_SUBFINDER}/subfinder.sh"
+    chmod +x "${PATH_SUBFINDER}/subfinder.sh"
     ln -s "${PATH_SUBFINDER}/subfinder.sh" /usr/bin/subfinder
     cd -
     rm -rf "${MAKE_SCRIPT_DIR}/Subfinder"
