@@ -1,4 +1,5 @@
 export GOPATH="${GOPATH:-${PATH_GOLANG}}"
+GITHUB_API_KEY=${GITHUB_API_KEY:-GITHUB_API_KEY}
 
 pre_install() {
     "${MAKE_SCRIPT_DIR}/config-files/make.sh" install go ${VERBOSE}
@@ -8,8 +9,10 @@ install() {(
     set -e
     go get -u github.com/gwen001/github-subdomains
     mkdir -p "${PATH_GITHUB_SUBDOMAINS}"
-    ln -s "${GOPATH}/bin/github-subdomains" "${PATH_GITHUB_SUBDOMAINS}/github-subdomains"
-    ln -s "${PATH_GITHUB_SUBDOMAINS}/github-subdomains" /usr/bin/github-subdomains
+    echo '#!/bin/sh' >"${PATH_GITHUB_SUBDOMAINS}/github-subdomains.sh"
+    echo "${GOPATH}/bin/github-subdomains" '${@}' "-t ${GITHUB_API_KEY}" >"${PATH_GITHUB_SUBDOMAINS}/github-subdomains.sh"
+    ln -s "${PATH_GITHUB_SUBDOMAINS}/github-subdomains.sh" /usr/bin/github-subdomains
+    chmod +x "${PATH_GITHUB_SUBDOMAINS}/github-subdomains.sh"
     exit 0
 )}
 
