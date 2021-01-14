@@ -39,7 +39,9 @@ install_packages() {
                            subdomainizer
                            subfinder
                            subover
-                           subscraper'
+                           subscraper
+                           seclists
+                           kalilists'
 
     for package in ${packages}; do
         perform_task_arg install_package "${package}"

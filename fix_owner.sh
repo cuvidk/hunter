@@ -36,6 +36,8 @@ fix_owner() {
     chown -R "${USER}":"${USER}" "${PATH_SUBSCRAPER}"
     chown -R "${USER}":"${USER}" "${PATH_EYEWITNESS}"
     chown -R "${USER}":"${USER}" "${PATH_GITHUB_SEARCH}"
+    chown -R "${USER}":"${USER}" "${PATH_SECLISTS_WORDLISTS}"
+    chown -R "${USER}":"${USER}" "${PATH_KALILISTS_WORDLISTS}"
 }
 
 main() {
