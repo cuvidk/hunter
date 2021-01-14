@@ -25,7 +25,7 @@ uninstall_packages() {
                            brutespray
                            dnmasscan
                            domlink
-                           eyewitness
+                           aquatone
                            favfreak
                            ffuf
                            getrelationship
