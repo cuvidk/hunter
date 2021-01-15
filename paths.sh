@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PATH_LISTS='/opt/lists/'
+PATH_LISTS='/opt/lists'
 PATH_WORDLISTS="${PATH_LISTS}/wordlists"
 PATH_RESOLVERS="${PATH_LISTS}/resolvers"
 PATH_AMASS_WORDLISTS="${PATH_WORDLISTS}/amass"

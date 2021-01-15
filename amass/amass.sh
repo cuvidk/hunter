@@ -13,7 +13,7 @@ install() {(
 
     mkdir -p "${PATH_AMASS}"
     echo '#!/bin/sh' >"${PATH_AMASS}/amass.sh"
-    echo "${GOPATH}/bin/amass" '${@}' "-config ${PATH_AMASS_CONFIG} -rf ${PATH_RESOLVERS}" >>"${PATH_AMASS}/amass.sh"
+    echo "${GOPATH}/bin/amass" '${@}' "-config ${PATH_AMASS_CONFIG} -rf ${PATH_RESOLVERS}/nameservers.txt" >>"${PATH_AMASS}/amass.sh"
     chmod +x "${PATH_AMASS}/amass.sh"
     ln -s "${PATH_AMASS}/amass.sh" /usr/bin/amass
 
