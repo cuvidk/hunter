@@ -3,6 +3,7 @@
 
 SCRIPT_DIR="$(realpath "$(dirname "${0}")")"
 . "${SCRIPT_DIR}/config-files/shell-utils/util.sh"
+. "${SCRIPT_DIR}/paths.sh"
 
 uninstall_package() {
     local package_name=$1
@@ -36,13 +37,18 @@ uninstall_packages() {
                            httprobe
                            massdns
                            metabigor
-                           shosubgo
                            subdomainizer
                            subfinder
                            subover
                            subscraper
                            seclists
-                           kalilists'
+                           kalilists
+                           dnsvalidator
+                           resolvers'
+                           #shosubgo
+                           #eyewitness
+
+    rm -rf "${PATH_LISTS}"
 
     for package in ${packages}; do
         perform_task_arg uninstall_package "${package}"

@@ -35,13 +35,16 @@ install_packages() {
                            httprobe
                            massdns
                            metabigor
-                           shosubgo
                            subdomainizer
                            subfinder
                            subover
                            subscraper
                            seclists
-                           kalilists'
+                           kalilists
+                           dnsvalidator
+                           resolvers'
+                           #shosubgo
+                           #eyewitness
 
     for package in ${packages}; do
         perform_task_arg install_package "${package}"

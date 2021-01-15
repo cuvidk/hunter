@@ -11,7 +11,7 @@ usage() {
 
 fix_owner() {
     chown -R "${USER}":"${USER}" "${PATH_GOLANG}"
-    chown -R "${USER}":"${USER}" "${PATH_WORDLISTS}"
+    chown -R "${USER}":"${USER}" "${PATH_LISTS}"
     chown -R "${USER}":"${USER}" "${PATH_AMASS}"
     chown -R "${USER}":"${USER}" "${PATH_AMASS_CONFIG}"
     chown -R "${USER}":"${USER}" "${PATH_METABIGOR}"
@@ -32,12 +32,11 @@ fix_owner() {
     chown -R "${USER}":"${USER}" "${PATH_BRUTESPRAY}"
     chown -R "${USER}":"${USER}" "${PATH_GETRELATIONSHIP}"
     chown -R "${USER}":"${USER}" "${PATH_FAVFREAK}"
-    chown -R "${USER}":"${USER}" "${PATH_SHOSUBGO}"
+    #chown -R "${USER}":"${USER}" "${PATH_SHOSUBGO}"
     chown -R "${USER}":"${USER}" "${PATH_SUBSCRAPER}"
     #chown -R "${USER}":"${USER}" "${PATH_EYEWITNESS}"
     chown -R "${USER}":"${USER}" "${PATH_GITHUB_SEARCH}"
-    chown -R "${USER}":"${USER}" "${PATH_SECLISTS_WORDLISTS}"
-    chown -R "${USER}":"${USER}" "${PATH_KALILISTS_WORDLISTS}"
+    chown -R "${USER}":"${USER}" "${PATH_DNSVALIDATOR}"
 }
 
 main() {

@@ -2,6 +2,7 @@ export GOPATH="${GOPATH:-${PATH_GOLANG}}"
 
 pre_install() {
     "${MAKE_SCRIPT_DIR}/config-files/make.sh" install go ${VERBOSE}
+    "${MAKE_SCRIPT_DIR}/make.sh" install resolvers ${VERBOSE}
 }
 
 install() {(
@@ -12,7 +13,7 @@ install() {(
 
     mkdir -p "${PATH_AMASS}"
     echo '#!/bin/sh' >"${PATH_AMASS}/amass.sh"
-    echo "${GOPATH}/bin/amass" '${@}' "-dir ${PATH_AMASS}" >>"${PATH_AMASS}/amass.sh"
+    echo "${GOPATH}/bin/amass" '${@}' "-config ${PATH_AMASS_CONFIG} -rf ${PATH_RESOLVERS}" >>"${PATH_AMASS}/amass.sh"
     chmod +x "${PATH_AMASS}/amass.sh"
     ln -s "${PATH_AMASS}/amass.sh" /usr/bin/amass
 
@@ -20,6 +21,7 @@ install() {(
     mkdir -p "${PATH_WORDLISTS}"
     cp -r "${MAKE_SCRIPT_DIR}/Amass/examples/wordlists/" "${PATH_AMASS_WORDLISTS}"
     rm -rf "${MAKE_SCRIPT_DIR}/Amass"
+
     exit 0
 )}
 
@@ -44,5 +46,6 @@ post_uninstall() {(
     "${MAKE_SCRIPT_DIR}/make_config.sh" uninstall amass "${USER}" ${VERBOSE}
     [ -n "${SUDO_USER}" ] && "${MAKE_SCRIPT_DIR}/make_config.sh" uninstall amass "${SUDO_USER}" ${VERBOSE}
     "${MAKE_SCRIPT_DIR}/config-files/make.sh" uninstall go ${VERBOSE}
+    "${MAKE_SCRIPT_DIR}/make.sh" uninstall resolvers ${VERBOSE}
     exit 0
 )}
