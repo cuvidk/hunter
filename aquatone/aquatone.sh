@@ -1,14 +1,26 @@
+AUR_USER='aur-user'
+
+pre_install() {(
+    set -e
+    useradd -d "/tmp/${AUR_USER}" "${AUR_USER}"
+    # TODO: This is very dangerous. Can I find a workaround ?
+    echo "${AUR_USER} ALL=(ALL) NOPASSWD: ALL" >>"/etc/sudoers.d/${AUR_USER}"
+    exit 0
+)}
+
 install() {(
     set -e
-    local user="${SUDO_USER:-$USER}"
-    sudo -u "${user}" git clone https://aur.archlinux.org/aquatone.git src-aquatone
-    cd src-aquatone
-    #TODO: This won't work if root is running the script
-    sudo -u "${user}" makepkg -si --noconfirm
+    sudo -u "${AUR_USER}" git clone https://aur.archlinux.org/aquatone.git /tmp/src-aquatone
+    cd /tmp/src-aquatone
+    sudo -u "${AUR_USER}" makepkg -si --noconfirm
+    exit 0
 )}
 
 post_install() {
-    rm -rf src-aquatone
+    rm -rf /tmp/src-aquatone
+    userdel "${AUR_USER}"
+    rm -rf "/etc/sudoers.d/${AUR_USER}"
+    rm -rf "/tmp/${AUR_USER}"
 }
 
 uninstall() {
