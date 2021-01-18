@@ -43,8 +43,8 @@ uninstall_packages() {
                            subscraper
                            seclists
                            kalilists
-                           dnsvalidator
-                           resolvers'
+                           dnsvalidator'
+                           #resolvers -- installed by amass/subfinder
                            #shosubgo
                            #eyewitness
 
