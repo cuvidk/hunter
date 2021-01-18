@@ -5,18 +5,26 @@ install() {(
     mkdir -p "${PATH_DNSVALIDATOR}"
     python3 setup.py install --record "${PATH_DNSVALIDATOR}/uninstall.txt"
 
-    #TODO: to lazy to move this to dnsvalidator_config.sh for now
-    sed "s|PATH_RESOLVERS|${PATH_RESOLVERS}|g" "${MAKE_SCRIPT_DIR}/dnsvalidator/config/update_resolvers.sh" >"${PATH_DNSVALIDATOR}/update_resolvers.sh"
-    chmod +x "${PATH_DNSVALIDATOR}/update_resolvers.sh"
 )}
 
-post_install() {
+post_install() {(
+    set -e
     rm -rf src-dnsvalidator
-}
+    "${MAKE_SCRIPT_DIR}/make_config.sh" install dnsvalidator "${USER}" ${VERBOSE}
+    [ -n "${SUDO_USER}" ] && "${MAKE_SCRIPT_DIR}/make_config.sh" install dnsvalidator "${SUDO_USER}" ${VERBOSE}
+    exit 0
+)}
 
 uninstall() {(
     set -e
     [ -e "${PATH_DNSVALIDATOR}/uninstall.txt" ] &&
         cat "${PATH_DNSVALIDATOR}/uninstall.txt" | xargs -I{} rm -rf {}
     rm -rf "${PATH_DNSVALIDATOR}"
+)}
+
+post_uninstall() {(
+    set -e
+    "${MAKE_SCRIPT_DIR}/make_config.sh" uninstall dnsvalidator "${USER}" ${VERBOSE}
+    [ -n "${SUDO_USER}" ] && "${MAKE_SCRIPT_DIR}/make_config.sh" uninstall dnsvalidator "${SUDO_USER}" ${VERBOSE}
+    exit 0
 )}
