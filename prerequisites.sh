@@ -23,10 +23,13 @@ install_packages() {
                     git
                     iputils
                     iproute2
-                    chromium"
+                    chromium
+                    tmux"
 
     local custom_packages="vim
                            zsh"
+
+    pacman -Syu --noconfirm
 
     for package in ${packages}; do
         perform_task_arg install_package ${package} "installing package ${package}"
