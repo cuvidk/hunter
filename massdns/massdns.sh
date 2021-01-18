@@ -9,7 +9,10 @@ install() {(
     mkdir -p "${PATH_MASSDNS}"
     cp "${MAKE_SCRIPT_DIR}/Massdns/bin/massdns" "${PATH_MASSDNS}"
     cp -R "${MAKE_SCRIPT_DIR}/Massdns/lists" "${PATH_MASSDNS}"
-    ln -s "${PATH_MASSDNS}/massdns" /usr/bin/massdns
+    echo '#!/bin/sh' >>"${PATH_MASSDNS}/massdns.sh"
+    echo "${PATH_MASSDNS}/massdns" '${@}' "-r ${PATH_RESOLVERS}/nameservers.txt" >>"${PATH_MASSDNS}/massdns.sh"
+    chmod +x "${PATH_MASSDNS}/massdns.sh"
+    ln -s "${PATH_MASSDNS}/massdns.sh" /usr/bin/massdns
     exit 0
 )}
 
