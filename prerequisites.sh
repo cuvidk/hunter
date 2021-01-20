@@ -24,7 +24,8 @@ install_packages() {
                     iputils
                     iproute2
                     chromium
-                    tmux"
+                    tmux
+                    ntp"
 
     local custom_packages="vim
                            zsh"
