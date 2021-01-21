@@ -37,6 +37,7 @@ fix_owner() {
     #chown -R "${USER}":"${USER}" "${PATH_EYEWITNESS}"
     chown -R "${USER}":"${USER}" "${PATH_GITHUB_SEARCH}"
     chown -R "${USER}":"${USER}" "${PATH_DNSVALIDATOR}"
+    chown -R "${USER}":"${USER}" "${PATH_LINKFINDER}"
 }
 
 main() {
