@@ -38,6 +38,7 @@ fix_owner() {
     chown -R "${USER}":"${USER}" "${PATH_GITHUB_SEARCH}"
     chown -R "${USER}":"${USER}" "${PATH_DNSVALIDATOR}"
     chown -R "${USER}":"${USER}" "${PATH_LINKFINDER}"
+    chown -R "${USER}":"${USER}" "${PATH_NUCLEI}"
 }
 
 main() {

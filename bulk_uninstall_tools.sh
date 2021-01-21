@@ -44,7 +44,8 @@ uninstall_packages() {
                            seclists
                            kalilists
                            dnsvalidator
-                           linkfinder'
+                           linkfinder
+                           nuclei'
                            #resolvers -- installed by amass/subfinder
                            #shosubgo
                            #eyewitness
