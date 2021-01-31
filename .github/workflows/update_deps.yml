@@ -1,0 +1,39 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Update config-files ref
+
+# Controls when the action will run. 
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "update_config_files_ref"
+  update_config_files_ref:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Pull config-files submodule
+        run: |
+          git submodule update --init --recursive
+          cd "${GITHUB_WORKSPACE}/config-files"
+          git checkout main
+          
+      - name: Setup git user
+        env:
+          USERNAME: "${{ secrets.USERNAME }}"
+          EMAIL: "${{ secrets.EMAIL }}"
+        run: |
+          git config --global user.name "${USERNAME}"
+          git config --global user.email "${EMAIL}"
+          
+      - name: Update config-files ref
+        run: |
+          git add "${GITHUB_WORKSPACE}/config-files"
+          git commit -m "Updated config-files-ref $(date +%s)" && git push
