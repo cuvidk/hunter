@@ -34,6 +34,7 @@ PATH_GITHUB_SEARCH='/opt/github-search'
 PATH_DNSVALIDATOR='/opt/dnsvalidator'
 PATH_LINKFINDER='/opt/linkfinder'
 PATH_NUCLEI='/opt/nuclei'
+PATH_SUBJACK='/opt/subjack'
 
 PATH_AMASS_CONFIG="${PATH_AMASS}/config.ini"
 PATH_DOMLINK_CONFIG="${PATH_DOMLINK}/domLink.cfg"

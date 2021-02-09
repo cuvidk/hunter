@@ -37,13 +37,14 @@ install_packages() {
                            metabigor
                            subdomainizer
                            subfinder
-                           subover
                            subscraper
                            seclists
                            kalilists
                            dnsvalidator
                            linkfinder
-                           nuclei'
+                           nuclei
+                           subjack'
+                           #subover -- replaced by subjack
                            #resolvers -- installed by amass/subfinder
                            #shosubgo
                            #eyewitness

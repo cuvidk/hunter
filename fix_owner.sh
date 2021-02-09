@@ -20,7 +20,7 @@ fix_owner() {
     chown -R "${USER}":"${USER}" "${PATH_GITHUB_SUBDOMAINS}"
     chown -R "${USER}":"${USER}" "${PATH_ASSETFINDER}"
     chown -R "${USER}":"${USER}" "${PATH_HTTPROBE}"
-    chown -R "${USER}":"${USER}" "${PATH_SUBOVER}"
+    #chown -R "${USER}":"${USER}" "${PATH_SUBOVER}"
     chown -R "${USER}":"${USER}" "${PATH_FFUF}"
     chown -R "${USER}":"${USER}" "${PATH_ASNLOOKUP}"
     chown -R "${USER}":"${USER}" "${PATH_DOMLINK}"
@@ -39,6 +39,7 @@ fix_owner() {
     chown -R "${USER}":"${USER}" "${PATH_DNSVALIDATOR}"
     chown -R "${USER}":"${USER}" "${PATH_LINKFINDER}"
     chown -R "${USER}":"${USER}" "${PATH_NUCLEI}"
+    chown -R "${USER}":"${USER}" "${PATH_SUBJACK}"
 }
 
 main() {
