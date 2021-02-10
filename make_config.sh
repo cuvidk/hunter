@@ -58,8 +58,6 @@ main() {
     [ -z "${pkg}" ] && exit_with_msg "Missing pkg param" 1
     [ ! -f "${MAKE_CONFIG_SCRIPT_DIR}/${pkg}/${pkg}_config.sh" ] && exit_with_msg "Missing ${pkg}_config.sh" 2
 
-    . "${MAKE_CONFIG_SCRIPT_DIR}/${pkg}/${pkg}_config.sh"
-
     [ -z "${user}" ] && exit_with_msg "Missing user param" 3
     HOME=
     for entry in $(cat /etc/passwd); do
@@ -71,6 +69,9 @@ main() {
     [ -z "${HOME}" -o ! -d "${HOME}" ] && exit_with_msg "Unable to find home dir for ${user}" 4
 
     perform_replacements
+
+    # source config script after replacements
+    . "${MAKE_CONFIG_SCRIPT_DIR}/${pkg}/${pkg}_config.sh"
 
     [ -z "$(type install | grep "function")" ] && exit_with_msg "Missing install func" 5
     [ -z "$(type uninstall | grep "function")" ] && exit_with_msg "Missing uninstall func" 6
